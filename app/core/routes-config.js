@@ -1,8 +1,0 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var routesConfig = require("./routes-config.json");
-exports.config = {
-    tabs: routesConfig.tabs.slice(),
-    modals: routesConfig.modals.slice()
-};
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicm91dGVzLWNvbmZpZy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInJvdXRlcy1jb25maWcudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxtREFBcUQ7QUFFMUMsUUFBQSxNQUFNLEdBQUc7SUFDaEIsSUFBSSxFQUNTLFlBQWEsQ0FBQyxJQUFJLFFBQzlCO0lBQ0QsTUFBTSxFQUNPLFlBQWEsQ0FBQyxNQUFNLFFBQ2hDO0NBQ0osQ0FBQyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCAqIGFzIHJvdXRlc0NvbmZpZyBmcm9tIFwiLi9yb3V0ZXMtY29uZmlnLmpzb25cIjtcclxuXHJcbmV4cG9ydCB2YXIgY29uZmlnID0ge1xyXG4gICAgdGFiczogW1xyXG4gICAgICAgIC4uLig8YW55PnJvdXRlc0NvbmZpZykudGFic1xyXG4gICAgXSxcclxuICAgIG1vZGFsczogW1xyXG4gICAgICAgIC4uLig8YW55PnJvdXRlc0NvbmZpZykubW9kYWxzXHJcbiAgICBdXHJcbn07Il19
