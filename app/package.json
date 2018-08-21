@@ -1,0 +1,17 @@
+{
+    "android": {
+        "v8Flags": "--expose_gc",
+        "forceLog": true
+    },
+    "main": "main.js",
+    "name": "tns-template-ks-blank-ng",
+    "version": "3.1.1",
+    "pluginsData": {
+        "kinvey-nativescript-sdk": {
+            "config": {
+                "appKey": "kid_B1p2_VFL7",
+                "appSecret": "50d0f35b18be45d0bee7371fb271a4e1"
+            }
+        }
+    }
+}

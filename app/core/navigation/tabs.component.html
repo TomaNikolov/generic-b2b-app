@@ -1,0 +1,4 @@
+<TabView androidTabsPosition="bottom" tabTextFontSize="20" class="page page-content" (loaded)="onTabViewLoaded($event)">
+	<page-router-outlet *tabItem="{ title: 'Home' }" name="homeTab"></page-router-outlet>
+	<page-router-outlet *tabItem="{ title: 'Gallery' }" name="galleryTab"></page-router-outlet>
+</TabView>

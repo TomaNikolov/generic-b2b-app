@@ -1,0 +1,31 @@
+{
+    "tabs": [
+        {
+            "path": "",
+            "redirectTo": "/(homeTab:home/home//galleryTab:gallery)",
+            "pathMatch": "full"
+        },
+        {
+            "path": "home",
+            "outlet": "homeTab",
+            "loadChildren": "./home#HomeModule"
+        },
+        {
+            "path": "gallery",
+            "outlet": "galleryTab",
+            "loadChildren": "./gallery#GalleryModule"
+        }
+    ],
+    "modals": [
+        {
+            "path": "profile",
+            "loadChildren": "./profile#ProfileModule",
+            "title": "Profile"
+        },
+        {
+            "path": "terms",
+            "loadChildren": "./terms#TermsModule",
+            "title": "Terms and Conditions"
+        }
+    ]
+}

@@ -1,0 +1,39 @@
+@import "~nativescript-theme-core/scss/dark";
+@import "app-variables";
+
+.fa {
+  font-family: "FontAwesome";
+}
+
+.hidden {
+  visibility: collapsed;
+}
+
+// ActionBar
+ActionBar .action-bar-title {
+  horizontal-align: center;
+}
+
+// SideDrawer
+.sidedrawer-container {
+  background-color: $app-sidedrawer-background-color;
+
+  .sidedrawer {
+    padding-top: 40px;
+
+    .sidedrawer .sidedrawer-list-item {
+      padding-left: 15;
+      margin-bottom: 90px;
+    }
+
+    .sidedrawer .sidedrawer-list-item Label {
+      vertical-align: center;
+      color: $app-sidedrawer-label-color;
+    }
+
+    .sidedrawer .sidedrawer-item .fa {
+      width: 20;
+      margin-right: 10;
+    }
+  }
+}
