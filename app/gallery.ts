@@ -1,6 +1,6 @@
 import { Component, NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
 import { NativeScriptRouterModule } from "nativescript-angular/router";
-import { SharedModule } from "./shared/shared.module";
+import { SharedModule } from "~/shared/shared.module";
 
 @Component({
     selector: "Gallery",
@@ -12,7 +12,11 @@ import { SharedModule } from "./shared/shared.module";
 </GridLayout>
 `
 })
-export class GalleryComponent { }
+export class GalleryComponent {
+    constructor() {
+		console.log("GalleryComponent")
+	}
+}
 
 @NgModule({
     imports: [

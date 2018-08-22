@@ -1,7 +1,7 @@
 import { Directive } from "@angular/core";
 import { ModalDialogParams } from "nativescript-angular/modal-dialog";
-import { ActionItem } from "tns-core-modules/ui/action-bar"
-import { Page } from "tns-core-modules/ui/page";
+import { ActionItem } from "tns-core-modules/ui/action-bar/action-bar"
+import { Page } from "tns-core-modules/ui/page/page";
 
 @Directive({
     selector: "[modalNavBar]"

@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import * as platform from "tns-core-modules/platform";
+import * as platform from "tns-core-modules/platform/platform";
 
 @Component({
     selector: "tabs",
@@ -7,6 +7,8 @@ import * as platform from "tns-core-modules/platform";
 })
 export class TabsComponent {
     onTabViewLoaded({ object: tabView }) {
+					console.log("TabsComponent")
+
         if (platform.isAndroid) {
             return;
         }

@@ -3,8 +3,8 @@ import { NativeScriptCommonModule } from "nativescript-angular/common";
 import { NativeScriptRouterModule } from "nativescript-angular/router";
 import { ModalDialogService } from "nativescript-angular/modal-dialog";
 
-import { ModalNavBarDirective } from "./directives/modal-nav-bar.directive"
-import { HideNavBar } from "./directives/hide-nav-bar.directive"
+import { ModalNavBarDirective } from "~/shared/directives/modal-nav-bar.directive"
+import { HideNavBar } from "~/shared/directives/hide-nav-bar.directive"
 
 @NgModule({
     imports: [

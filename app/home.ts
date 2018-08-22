@@ -1,6 +1,6 @@
 import { Component, NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
 import { NativeScriptRouterModule } from "nativescript-angular/router";
-import { SharedModule } from "./shared/shared.module"
+import { SharedModule } from "~/shared/shared.module"
 
 @Component({
 	template: `
@@ -12,6 +12,10 @@ import { SharedModule } from "./shared/shared.module"
 `
 })
 export class HomeComponent {
+	constructor() {
+		console.log("HomeComponent")
+	}
+
 }
 
 @Component({
@@ -24,6 +28,9 @@ export class HomeComponent {
 `
 })
 export class Home2Component {
+	constructor() {
+		console.log("Home2Component")
+	}
 }
 
 @NgModule({
