@@ -26,6 +26,11 @@
             "path": "terms",
             "loadChildren": "./terms#TermsModule",
             "title": "Terms and Conditions"
+        },
+        {
+            "path": "master",
+            "title": "Master detail",
+            "loadChildren": "./master-details/customers.module#CustomersModule"
         }
     ]
 }

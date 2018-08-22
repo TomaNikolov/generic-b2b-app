@@ -1,0 +1,12 @@
+<GridLayout hideNavBar class="page page-content">
+    <RadListView [items]="customers" (itemTap)="onCustomerItemTap($event)" class="list-group">
+        <ng-template tkListItemTemplate let-customer="item">
+            <StackLayout class="list-group-item">
+                <Label [text]="customer.name"></Label>
+                <Label [text]="customer.address"></Label>
+            </StackLayout>
+        </ng-template>
+    </RadListView>
+
+    <ActivityIndicator [busy]="isLoading"></ActivityIndicator>
+</GridLayout>

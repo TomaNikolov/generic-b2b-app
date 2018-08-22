@@ -1,0 +1,20 @@
+<GridLayout hideNavBar class="page page-content">
+    <StackLayout>
+        <Label class="action-bar-title" [text]="customer.name"></Label>
+        <Label class="action-bar-title" text="Info"></Label>
+        <StackLayout class="list-group-item">
+            <Label text="Address"></Label>
+            <Label [text]="customer.contact.address"></Label>
+        </StackLayout>
+        <StackLayout class="list-group-item">
+            <Label text="Phone"></Label>
+            <Label [text]="customer.contact.phone"></Label>
+        </StackLayout>
+
+        <GridLayout columns="auto, auto" rows="auto, auto">
+            <Image col="0" rowSpan="2" [src]="customer.contact.picture" width="20" height="20"></Image>
+            <Label col="1" row="0" [text]="customer.name"></Label>
+            <Label col="1" row="1" [text]="customer.contact.occupation"></Label>
+        </GridLayout>
+    </StackLayout>
+</GridLayout>
