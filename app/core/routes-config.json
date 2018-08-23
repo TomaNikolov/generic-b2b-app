@@ -36,6 +36,11 @@
             "path": "login",
             "loadChildren": "./login/login.module#LoginModule",
             "title": "login"
+        },
+        {
+            "path": "reports",
+            "title": "Reports",
+            "loadChildren": "./reports/reports.module#ReportsModule"
         }
     ]
 }

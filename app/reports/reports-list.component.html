@@ -1,0 +1,34 @@
+<StackLayout hideNavBar class="page page-content">
+    <GridLayout columns="*, *, *" rows="auto, auto">
+        <Label col="0" row="0" text="Time period"></Label>
+        <Label col="1" row="0" text="Status"></Label>
+        <Label col="2" row="0" text="Sort By"></Label>
+
+        <ListPicker col="0" row="1" [items]="timePeriods" (selectedIndexChange)="selectedIndexChanged($event)" selectedIndex="0"></ListPicker>
+        <ListPicker col="1" row="1" [items]="statuses" (selectedIndexChange)="selectedIndexChanged($event)" selectedIndex="0" verticalAlignment="center" horizontalAlignment="center"></ListPicker>
+        <ListPicker col="2" row="1" [items]="sortBys" (selectedIndexChange)="selectedIndexChanged($event)" selectedIndex="0" verticalAlignment="center" horizontalAlignment="center"></ListPicker>
+    </GridLayout>
+
+    <StackLayout class="hr-light m-10"></StackLayout>
+
+    <GridLayout columns="*, *, *, *" rows="auto, auto">
+        <Label col="0" row="0" text="Date"></Label>
+        <Label col="1" row="0" text="Subject"></Label>
+        <Label col="2" row="0" text="Assigned To"></Label>
+        <Label col="3" row="0" text="State"></Label>
+
+        <StackLayout colSpan="4" row="1">
+            <RadListView [items]="reports" class="list-group">
+                <ng-template tkListItemTemplate let-report="item">
+                    <GridLayout columns="*, *, *, *" rows="auto">
+                        <Label col="0" text="{{ (report.timestamp * 1000) | date:'MMM d' }}"></Label>
+                        <Label col="1" [text]="report.subject"></Label>
+                        <Label col="2" [text]="report.assigned"></Label>
+                        <Label col="3" [text]="report.state"></Label>
+                    </GridLayout>
+                </ng-template>
+            </RadListView>
+        </StackLayout>
+    </GridLayout>
+    <ActivityIndicator [busy]="isLoading"></ActivityIndicator>
+</StackLayout>
