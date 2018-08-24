@@ -40,7 +40,6 @@ export class CustomersDetailComponent implements OnInit {
     }
 
     get categoricalSource(): ObservableArray<any> {
-        console.log("HERE!!")
         return this._categoricalSource;
     }
 

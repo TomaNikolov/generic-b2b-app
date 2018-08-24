@@ -2,13 +2,14 @@ import { Directive } from "@angular/core";
 import { ModalDialogParams } from "nativescript-angular/modal-dialog";
 import { ActionItem } from "tns-core-modules/ui/action-bar/action-bar"
 import { Page } from "tns-core-modules/ui/page/page";
+import * as app from "tns-core-modules/application/application";
 
 @Directive({
     selector: "[modalNavBar]"
 })
 export class ModalNavBarDirective {
     constructor(private params: ModalDialogParams,
-                private page: Page) {
+        private page: Page) {
         this.page.actionBar.title = this.params.context.title;
         this.addNavButton();
     }
@@ -20,7 +21,9 @@ export class ModalNavBarDirective {
 
         const backButton = new ActionItem();
 
-        backButton.ios.position = "right";
+        if (app.ios) {
+            backButton.ios.position = "right";
+        }
         backButton.text = "Done";
         backButton.on("tap", () => this.params.closeCallback());
 
