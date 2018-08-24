@@ -1,7 +1,8 @@
 import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
 import { NativeScriptCommonModule } from "nativescript-angular/common";
 import { NativeScriptFormsModule } from "nativescript-angular/forms";
-import { NativeScriptUIListViewModule } from "nativescript-ui-listview/angular/listview-directives";
+import { NativeScriptUIListViewModule } from "nativescript-ui-listview/angular";
+import { NativeScriptUIChartModule } from "nativescript-ui-chart/angular";
 
 import { SharedModule } from "~/shared/shared.module"
 import { CustomersDetailComponent } from "~/master-details/customers-detail/customers-detail.component";
@@ -12,6 +13,7 @@ import { CustomersService } from "~/master-details/shared/customers.service";
 @NgModule({
     imports: [
         SharedModule,
+        NativeScriptUIChartModule,
         CustomersRoutingModule,
         NativeScriptCommonModule,
         NativeScriptFormsModule,
@@ -19,7 +21,7 @@ import { CustomersService } from "~/master-details/shared/customers.service";
     ],
     declarations: [
         CustomersListComponent,
-        CustomersDetailComponent,
+        CustomersDetailComponent
     ],
     entryComponents: [
         CustomersListComponent
