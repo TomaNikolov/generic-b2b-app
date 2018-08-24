@@ -12,9 +12,7 @@ import { SharedModule } from "~/shared/shared.module"
 `
 })
 export class HomeComponent {
-	constructor() {
-		console.log("HomeComponent")
-	}
+	constructor() { }
 
 }
 
@@ -28,9 +26,7 @@ export class HomeComponent {
 `
 })
 export class Home2Component {
-	constructor() {
-		console.log("Home2Component")
-	}
+	constructor() { }
 }
 
 @NgModule({

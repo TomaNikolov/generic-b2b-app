@@ -7,8 +7,6 @@ import * as platform from "tns-core-modules/platform/platform";
 })
 export class TabsComponent {
     onTabViewLoaded({ object: tabView }) {
-					console.log("TabsComponent")
-
         if (platform.isAndroid) {
             return;
         }

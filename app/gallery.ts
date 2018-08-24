@@ -13,9 +13,7 @@ import { SharedModule } from "~/shared/shared.module";
 `
 })
 export class GalleryComponent {
-    constructor() {
-		console.log("GalleryComponent")
-	}
+    constructor() { }
 }
 
 @NgModule({

@@ -18,8 +18,6 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        debugger;
-
         if (!this.userService.isLoginIn()) {
             this.open("login").then(result => {
                 this.removeBackPressEvent()

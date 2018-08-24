@@ -27,7 +27,6 @@ export class LoginComponent implements OnInit{
 	}
 
 	ngOnInit(): void {
-		// debugger;
 		// if (app.android) {
 		// 	(<any>this.page)._dialogFragment.getDialog().setCanceledOnTouchOutside(false);
 		// }
@@ -38,7 +37,6 @@ export class LoginComponent implements OnInit{
 	}
 
 	submit() {
-		debugger;
 		if (!this.user.username || !this.user.password) {
 			this.alert("Please provide both an email address and password.");
 			return;

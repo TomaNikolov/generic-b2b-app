@@ -25,7 +25,6 @@ export class CustomersDetailComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        console.log("ngOnInit")
         this._pageRoute.activatedRoute
             .pipe(switchMap((activatedRoute) => activatedRoute.params))
             .forEach((params) => {
@@ -35,13 +34,11 @@ export class CustomersDetailComponent implements OnInit {
     }
 
     public onMapReady(args: any) {
-        console.log(`${this.mapBoxApiUrl}/v4/geocode/mapbox.places/"${this._customer.address}".json?access_token=${this.mapboxToken}`)
         this.http.get(`${this.mapBoxApiUrl}/v4/geocode/mapbox.places/"${this._customer.address}".json?access_token=${this.mapboxToken}`)
             .pipe(map(res => res.json()))
             .subscribe((response: any) => {
                 const features: any[] = response.features;
                 features.sort((a, b) => b.relevance - a.relevance)
-                console.log(features)
                 this._address = features[0];
 
                 if (!this._address) {

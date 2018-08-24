@@ -12,9 +12,7 @@ import { SharedModule } from "~/shared/shared.module"
 `
 })
 export class ProfileComponent {
-    constructor() {
-		console.log("ProfileComponent")
-	}
+    constructor() { }
 }
 
 @NgModule({

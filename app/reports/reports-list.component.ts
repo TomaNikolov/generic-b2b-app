@@ -61,8 +61,6 @@ export class ReportsListComponent implements OnInit, OnDestroy {
 
     public selectedIndexChanged(args) {
         let picker = <ListPicker>args.object;
-        console.log("picker selection: " + picker.selectedIndex);
-
         this.picked = this.timePeriods[picker.selectedIndex];
     }
 
