@@ -33,6 +33,12 @@
             "loadChildren": "./master-details/customers.module#CustomersModule"
         },
         {
+            "path": "my-customers",
+            "title": "My Customers",
+            "loadChildren": "./my-customers/my-customers.module#MyCustomersModule"
+        },
+
+        {
             "path": "login",
             "loadChildren": "./login/login.module#LoginModule",
             "title": "login"

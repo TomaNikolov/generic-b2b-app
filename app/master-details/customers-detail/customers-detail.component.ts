@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { PageRoute, RouterExtensions } from "nativescript-angular/router";
 import { switchMap } from "rxjs/operators";
 
-import { CustomersService } from "../shared/customers.service";
+import { CustomersService } from "~/master-details/shared/customers.service";
 
 @Component({
     selector: "CustomersDetail",

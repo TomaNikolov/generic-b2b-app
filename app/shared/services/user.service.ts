@@ -43,7 +43,6 @@ export class UserService {
 
     isLoginIn(): boolean {
         const user = Kinvey.User.getActiveUser();
-        console.log(user);
         return !!user
     }
 }

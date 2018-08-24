@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
     constructor(private modalDialogService: ModalDialogService,
         private viewContainerRef: ViewContainerRef,
         private userService: UserService) {
-            this.userService.logout()
+            // this.userService.logout()
     }
 
     ngOnInit(): void {
