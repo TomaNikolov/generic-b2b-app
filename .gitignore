@@ -65,3 +65,4 @@ platforms
 hooks
 package-lock.json
 *.js
+*.css
