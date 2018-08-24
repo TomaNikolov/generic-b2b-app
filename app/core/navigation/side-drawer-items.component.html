@@ -12,6 +12,12 @@
 		</GridLayout>
 		<StackLayout class="hr-light m-10"></StackLayout>
 
+		<GridLayout columns="auto, 10, *" class="sidedrawer-list-item" (tap)="open('reports')">
+			<Label col="0" text="&#xf073;" class="fa p-l-10 text-primary"></Label>
+			<Label col="2" text="Reports" class="p-r-10 text-primary"></Label>
+		</GridLayout>
+		<StackLayout class="hr-light m-10"></StackLayout>
+
 		<GridLayout columns="auto, 10, *" class="sidedrawer-list-item" (tap)="open('master')">
 			<Label col="0" text="&#xf073;" class="fa p-l-10 text-primary"></Label>
 			<Label col="2" text="Master detail" class="p-r-10 text-primary"></Label>

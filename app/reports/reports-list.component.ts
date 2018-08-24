@@ -1,5 +1,6 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit, ViewChild, ElementRef, EventEmitter, Output } from "@angular/core";
 import { ObservableArray } from "data/observable-array";
+import { AnimationCurve } from "ui/enums";
 import { ReportsService } from "./reports.service";
 import { ListViewEventData } from "nativescript-ui-listview";
 import { ActivatedRoute } from "@angular/router";
@@ -7,6 +8,7 @@ import { Subscription } from "rxjs";
 import { finalize } from "rxjs/operators";
 import { RouterExtensions } from "nativescript-angular/router";
 import { ListPicker } from "ui/list-picker";
+import { Report } from "./report.model";
 
 let pokemonList = ["Bulbasaur", "Parasect", "Venonat", "Venomoth", "Diglett",
     "Dugtrio", "Meowth", "Persian", "Psyduck", "Arcanine", "Poliwrath", "Machoke"];
@@ -20,23 +22,14 @@ export class ReportsListComponent implements OnInit, OnDestroy {
     private _dataSubscription: Subscription;
     private _reports: ObservableArray<any> = new ObservableArray<any>([]);
     private _isLoading: boolean = false;
-    private picked: string;
-    private _timePeriods: string[];
-    private _statuses: string[];
-    private _sortBys: string[];
+    private _report: Report;
 
     constructor(
         private activatedRoute: ActivatedRoute,
         private _reportsService: ReportsService,
         private _routerExtensions: RouterExtensions
     ) {
-        this._timePeriods = ["Any", "This week",
-            "This month", "This quarter", "Last 24 hours",
-            "Last 7 days", "Last 30 days"];
-
-        this._statuses = ["Any", "Open", "In Progress", "Completed"];
-
-        this._sortBys = ["Last updated", "Last created"];
+        this._report = new Report("", "", "");
     }
 
     get reports(): ObservableArray<any> {
@@ -48,20 +41,17 @@ export class ReportsListComponent implements OnInit, OnDestroy {
     }
 
     get timePeriods(): string[] {
-        return this._timePeriods;
+        return ["Any", "This week",
+            "This month", "This quarter", "Last 24 hours",
+            "Last 7 days", "Last 30 days"];
     }
 
     get statuses(): string[] {
-        return this._statuses;
+        return ["Any", "Open", "In Progress", "Completed"];
     }
 
     get sortBys(): string[] {
-        return this._sortBys;
-    }
-
-    public selectedIndexChanged(args) {
-        let picker = <ListPicker>args.object;
-        this.picked = this.timePeriods[picker.selectedIndex];
+        return ["Last updated", "Last created"];
     }
 
     ngOnInit(): void {
@@ -75,6 +65,12 @@ export class ReportsListComponent implements OnInit, OnDestroy {
                     this._isLoading = false;
                 });
         }
+
+        this._report = new Report("Tap...", "Tap...", "Tap...");
+    }
+
+    get report(): Report {
+        return this._report;
     }
 
     ngOnDestroy(): void {

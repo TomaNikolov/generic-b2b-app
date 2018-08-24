@@ -1,13 +1,20 @@
 <StackLayout hideNavBar class="page page-content">
-    <GridLayout columns="*, *, *" rows="auto, auto">
-        <Label col="0" row="0" text="Time period"></Label>
-        <Label col="1" row="0" text="Status"></Label>
-        <Label col="2" row="0" text="Sort By"></Label>
+    <RadDataForm tkExampleTitle tkToggleNavButton [source]="report">
+        <TKPropertyGroup tkDataFormGroups name="" hidden="false">
+            <TKDataFormGridLayout tkPropertyGroupLayout></TKDataFormGridLayout>
 
-        <ListPicker col="0" row="1" [items]="timePeriods" (selectedIndexChange)="selectedIndexChanged($event)" selectedIndex="0"></ListPicker>
-        <ListPicker col="1" row="1" [items]="statuses" (selectedIndexChange)="selectedIndexChanged($event)" selectedIndex="0" verticalAlignment="center" horizontalAlignment="center"></ListPicker>
-        <ListPicker col="2" row="1" [items]="sortBys" (selectedIndexChange)="selectedIndexChanged($event)" selectedIndex="0" verticalAlignment="center" horizontalAlignment="center"></ListPicker>
-    </GridLayout>
+            <TKEntityProperty tkPropertyGroupProperties index="0" columnIndex="0" name="timePeriod" displayName="Time Period" [valuesProvider]="timePeriods">
+                <TKPropertyEditor tkEntityPropertyEditor type="Picker"></TKPropertyEditor>
+            </TKEntityProperty>
+            <TKEntityProperty tkPropertyGroupProperties index="0" columnIndex="1" name="status" displayName="Status" [valuesProvider]="statuses">
+                <TKPropertyEditor tkEntityPropertyEditor type="Picker"></TKPropertyEditor>
+            </TKEntityProperty>
+            <TKEntityProperty tkPropertyGroupProperties index="0" columnIndex="2" name="sortBy" displayName="Sort By" [valuesProvider]="sortBys">
+                <TKPropertyEditor tkEntityPropertyEditor type="Picker"></TKPropertyEditor>
+            </TKEntityProperty>
+
+        </TKPropertyGroup>
+    </RadDataForm>
 
     <StackLayout class="hr-light m-10"></StackLayout>
 
@@ -32,3 +39,22 @@
     </GridLayout>
     <ActivityIndicator [busy]="isLoading"></ActivityIndicator>
 </StackLayout>
+
+<GridLayout [visibility]="showingLongListPicker ? 'visible' : 'collapsed'" rows="*, auto, *" columns="30, *, 30">
+    <GridLayout style="background-color: rgba(0,0,0,0.8);" rowSpan="3" colSpan="3" #longListPickerDimmer></GridLayout>
+    <StackLayout row="1" col="1" #longListPickerContainer style="background-color: white; border-radius: 10;">
+        <StackLayout>
+            <ListView [items]="itemsToShow" class="list-group" height="300" (itemTap)="chooseLongList($event)">
+                <ng-template let-item="item" let-odd="odd" let-even="even">
+                    <StackLayout>
+                        <Label [text]="item" class="list-group-item"></Label>
+
+                    </StackLayout>
+                </ng-template>
+            </ListView>
+        </StackLayout>
+        <GridLayout columns="auto, *, auto" style="background-color: #E0E0E0;" paddingTop="5" paddingBottom="5">
+            <Button class="transBtn sm" text="Cancel" (tap)="closeLongListPicker()"></Button>
+        </GridLayout>
+    </StackLayout>
+</GridLayout>
