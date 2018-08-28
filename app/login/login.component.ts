@@ -2,6 +2,7 @@ import { Component, OnInit, ElementRef, ViewChild } from "@angular/core";
 import { alert, prompt } from "tns-core-modules/ui/dialogs/dialogs";
 import { Page } from "tns-core-modules/ui/page/page";
 import { ModalDialogParams } from "nativescript-angular/directives/dialogs";
+import * as app from "tns-core-modules/application/application";
 
 import { User } from "~/models/user.model";
 import { UserService } from "~/shared/services/user.service";
@@ -13,7 +14,7 @@ import { UserService } from "~/shared/services/user.service";
 	templateUrl: "./login.component.html",
 	styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent implements OnInit {
 	isLoggingIn = true;
 	user: User;
 	@ViewChild("password") password: ElementRef;
@@ -27,10 +28,17 @@ export class LoginComponent implements OnInit{
 	}
 
 	ngOnInit(): void {
-		// if (app.android) {
-		// 	(<any>this.page)._dialogFragment.getDialog().setCanceledOnTouchOutside(false);
-		// }
+		if (app.android) {
+			this.page.on("loaded", () => {
+				this.page.frame.on("activityBackPressed", (args: any) => {
+					args.cancel = true;
+					// global.android.os.Process.killProcess(global.android.os.Process.myPid());
+					app.android.foregroundActivity.moveTaskToBack(true);
+				});
+			});
+		}
 	}
+
 
 	toggleForm() {
 		this.isLoggingIn = !this.isLoggingIn;

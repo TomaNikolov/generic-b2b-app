@@ -1,0 +1,41 @@
+<StackLayout modalNavBar class="page page-content">
+    <GridLayout columns="*, *, *" rows="auto, auto">
+        <Label col="0" row="0" text="Category"></Label>
+        <Label col="1" row="0" text="Promo"></Label>
+        <Label col="2" row="0" text="Apply"></Label>
+
+        <!-- <ListPicker col="0" row="1" [items]="timePeriods" (selectedIndexChange)="selectedIndexChanged($event)" selectedIndex="0"></ListPicker>
+            <ListPicker col="1" row="1" [items]="statuses" (selectedIndexChange)="selectedIndexChanged($event)" selectedIndex="0" verticalAlignment="center" horizontalAlignment="center"></ListPicker>
+            <ListPicker col="2" row="1" [items]="sortBys" (selectedIndexChange)="selectedIndexChanged($event)" selectedIndex="0" verticalAlignment="center" horizontalAlignment="center"></ListPicker> -->
+    </GridLayout>
+
+    <StackLayout class="hr-light m-10"></StackLayout>
+
+    <GridLayout columns="*, *, *, *, *" rows="auto, auto">
+        <Label col="0" row="0" text="Product Name"></Label>
+        <Label col="1" row="0" text="Unit Price"></Label>
+        <Label col="2" row="0" text="Unit In Stock"></Label>
+        <Label col="3" row="0" text="Promo"></Label>
+        <Label col="4" row="0" text="Quantity"></Label>
+
+        <GridLayout colSpan="5" row="1">
+            <RadListView [items]="products" class="list-group">
+                <ng-template tkListItemTemplate let-product="item">
+                    <GridLayout columns="*, *, *, *, *" rows="auto">
+                        <Label col="0" [text]="product.productName"></Label>
+                        <Label col="1" [text]="product.unitPrice"></Label>
+                        <Label col="2" [text]="product.unitInStock"></Label>
+                        <Label col="3" [text]="product.promo | questionableBoolean"></Label>
+                    </GridLayout>
+                </ng-template>
+            </RadListView>
+
+        </GridLayout>
+    </GridLayout>
+    <StackLayout class="hr-light m-10"></StackLayout>
+    <GridLayout columns="*, *" rows="auto, auto">
+        <Label col="0" row="0" text="Order Total"></Label>
+        <Label col="1" row="0" text="$1,098.00" class="text-right"></Label>
+    </GridLayout>
+    <ActivityIndicator [busy]="isLoading"></ActivityIndicator>
+</StackLayout>

@@ -29,5 +29,11 @@
 			<Label col="2" text="My Customers" class="p-r-10 text-primary"></Label>
 		</GridLayout>
 		<StackLayout class="hr-light m-10"></StackLayout>
+
+		<GridLayout columns="auto, 10, *" class="sidedrawer-list-item" (tap)="open('place-order')">
+				<Label col="0" text="&#xf0db;" class="fa p-l-10 text-primary"></Label>
+				<Label col="2" text="Place Order" class="p-r-10 text-primary"></Label>
+			</GridLayout>
+			<StackLayout class="hr-light m-10"></StackLayout>
 	</StackLayout>
 </StackLayout>

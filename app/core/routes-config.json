@@ -47,6 +47,11 @@
             "path": "reports",
             "title": "Reports",
             "loadChildren": "./reports/reports.module#ReportsModule"
+        },
+        {
+            "path": "place-order",
+            "title": "Place Order",
+            "loadChildren": "./place-order/place-order.module#PlaceOrderModule"
         }
     ]
 }
