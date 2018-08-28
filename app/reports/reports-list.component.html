@@ -4,13 +4,19 @@
             <TKDataFormGridLayout tkPropertyGroupLayout></TKDataFormGridLayout>
 
             <TKEntityProperty tkPropertyGroupProperties index="0" columnIndex="0" name="timePeriod" displayName="Time Period" [valuesProvider]="timePeriods">
-                <TKPropertyEditor tkEntityPropertyEditor type="Picker"></TKPropertyEditor>
+                <TKPropertyEditor tkEntityPropertyEditor type="Picker">
+                    <TKPropertyEditorStyle tkPropertyEditorStyle labelPosition="Top"></TKPropertyEditorStyle>
+                </TKPropertyEditor>
             </TKEntityProperty>
             <TKEntityProperty tkPropertyGroupProperties index="0" columnIndex="1" name="status" displayName="Status" [valuesProvider]="statuses">
-                <TKPropertyEditor tkEntityPropertyEditor type="Picker"></TKPropertyEditor>
+                <TKPropertyEditor tkEntityPropertyEditor type="Picker">
+                    <TKPropertyEditorStyle tkPropertyEditorStyle labelPosition="Top"></TKPropertyEditorStyle>
+                </TKPropertyEditor>
             </TKEntityProperty>
             <TKEntityProperty tkPropertyGroupProperties index="0" columnIndex="2" name="sortBy" displayName="Sort By" [valuesProvider]="sortBys">
-                <TKPropertyEditor tkEntityPropertyEditor type="Picker"></TKPropertyEditor>
+                <TKPropertyEditor tkEntityPropertyEditor type="Picker">
+                    <TKPropertyEditorStyle tkPropertyEditorStyle labelPosition="Top"></TKPropertyEditorStyle>
+                </TKPropertyEditor>
             </TKEntityProperty>
 
         </TKPropertyGroup>
@@ -18,24 +24,24 @@
 
     <StackLayout class="hr-light m-10"></StackLayout>
 
-    <GridLayout columns="*, *, *, *" rows="auto, auto">
+    <GridLayout columns="*, *, *, *" rows="auto">
         <Label col="0" row="0" text="Date"></Label>
         <Label col="1" row="0" text="Subject"></Label>
         <Label col="2" row="0" text="Assigned To"></Label>
         <Label col="3" row="0" text="State"></Label>
-
-        <StackLayout colSpan="4" row="1">
-            <RadListView [items]="reports" class="list-group">
-                <ng-template tkListItemTemplate let-report="item">
-                    <GridLayout columns="*, *, *, *" rows="auto">
-                        <Label col="0" text="{{ (report.timestamp * 1000) | date:'MMM d' }}"></Label>
-                        <Label col="1" [text]="report.subject"></Label>
-                        <Label col="2" [text]="report.assigned"></Label>
-                        <Label col="3" [text]="report.state"></Label>
-                    </GridLayout>
-                </ng-template>
-            </RadListView>
-        </StackLayout>
     </GridLayout>
-    <ActivityIndicator [busy]="isLoading"></ActivityIndicator>
+
+    <GridLayout>
+        <ActivityIndicator [busy]="isLoading"></ActivityIndicator>
+        <RadListView [items]="reports" class="list-group">
+            <ng-template tkListItemTemplate let-report="item">
+                <GridLayout columns="*, *, *, *" rows="auto">
+                    <Label col="0" text="{{ (report.timestamp * 1000) | date:'MMM d' }}"></Label>
+                    <Label col="1" [text]="report.subject"></Label>
+                    <Label col="2" [text]="report.assigned"></Label>
+                    <Label col="3" [text]="report.state"></Label>
+                </GridLayout>
+            </ng-template>
+        </RadListView>
+    </GridLayout>
 </StackLayout>
