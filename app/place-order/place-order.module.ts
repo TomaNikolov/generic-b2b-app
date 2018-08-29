@@ -10,6 +10,11 @@ import { PlaceOrderRoutingModule } from "~/place-order/place-order-routing.modul
 import { ProductsService } from "~/place-order/shared/products.service";
 import { NativeScriptHttpModule } from "nativescript-angular/http";
 import { QuestionableBooleanPipe } from '~/place-order/pipes/questionable-boolean.pipe';
+import { TotalPricePipe } from '~/place-order/pipes/total-price.pipe';
+import { Data } from "~/place-order/providers/data";
+import { ConfirmOrderComponent } from "~/place-order/confirm-order/confirm-order.component";
+import { CustomersService } from "~/place-order/shared/customers.service";
+import { Utils } from "~/place-order/shared/utils";
 
 @NgModule({
     imports: [
@@ -23,13 +28,18 @@ import { QuestionableBooleanPipe } from '~/place-order/pipes/questionable-boolea
     ],
     declarations: [
         PlaceOrderListComponent,
+        ConfirmOrderComponent,
         QuestionableBooleanPipe,
+        TotalPricePipe,
     ],
     entryComponents: [
         PlaceOrderListComponent
     ],
     providers: [
-        ProductsService
+        ProductsService,
+        CustomersService,
+        Utils,
+        Data,
     ],
     schemas: [
         NO_ERRORS_SCHEMA

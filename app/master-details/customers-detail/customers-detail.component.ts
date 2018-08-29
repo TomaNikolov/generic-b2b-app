@@ -1,8 +1,9 @@
-import { Component, OnInit } from "@angular/core";
-import { PageRoute, RouterExtensions } from "nativescript-angular/router";
-import { switchMap } from "rxjs/operators";
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { RouterExtensions } from "nativescript-angular/router";
 import { ObservableArray } from "data/observable-array";
+import { ActivatedRoute } from "@angular/router";
 
+import { ModalNavBarDirective } from "~/shared/directives/modal-nav-bar.directive"
 import { CustomersService } from "~/master-details/shared/customers.service";
 
 @Component({
@@ -14,25 +15,35 @@ export class CustomersDetailComponent implements OnInit {
     private _customer: any;
     private _categoricalSource: ObservableArray<any>;
 
+    @ViewChild(ModalNavBarDirective) modalNavBar: ModalNavBarDirective;
     constructor(
         private _customersService: CustomersService,
-        private _pageRoute: PageRoute,
-        private _routerExtensions: RouterExtensions
+        private _routerExtensions: RouterExtensions,
+        private activatedRoute: ActivatedRoute,
     ) { }
 
     ngOnInit(): void {
-        this._pageRoute.activatedRoute
-            .pipe(switchMap((activatedRoute) => activatedRoute.params))
-            .forEach((params) => {
-                const customerId = params.id;
-
-                this._customer = this._customersService.getCustomerById(customerId);
-            });
+        this.activatedRoute.params.subscribe(params => {
+            const customerId = params.id;
+            this._customer = this._customersService.getCustomerById(customerId);
+        });
 
         this._categoricalSource = new ObservableArray([
             { label: "Last month", amount: 75000 },
             { label: "This month", amount: 25000 },
         ]);
+
+        this.modalNavBar.AddNavigationButton("Place order", () => {
+            this._routerExtensions.navigate(["place-order/place-order", this._customer._id],
+                {
+                    animated: true,
+                    transition: {
+                        name: "slide",
+                        duration: 200,
+                        curve: "ease"
+                    }
+                });
+        });
     }
 
     get customer(): any {
