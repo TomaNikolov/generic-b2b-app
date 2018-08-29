@@ -3,6 +3,12 @@
   font-family: "FontAwesome";
 }
 
+.customTabView {
+  tab-text-color: white;
+  selected-tab-text-color: #0071CA;
+  tab-background-color: #008EFF;
+}
+
 .hidden {
   visibility: collapsed;
 }
