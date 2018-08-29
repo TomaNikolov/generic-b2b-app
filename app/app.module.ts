@@ -11,6 +11,7 @@ import { AppComponent } from "~/app.component";
 import { SideDrawerItemsComponent } from "~/core/navigation/side-drawer-items.component"
 import { TabsComponent } from "~/core/navigation/tabs.component";
 import { ModalComponent } from "~/core/navigation/modal.component";
+import { LoggedInLazyLoadGuard } from "./logged-in-lazy-load.guard";
 
 import { UserService } from "~/shared/services/user.service";
 
@@ -35,7 +36,8 @@ import { UserService } from "~/shared/services/user.service";
         ModalComponent,
     ],
     providers: [
-        UserService
+        UserService,
+        LoggedInLazyLoadGuard
     ],
     schemas: [NO_ERRORS_SCHEMA]
 })

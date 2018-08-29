@@ -5,9 +5,7 @@ import { Page } from "tns-core-modules/ui/page/page";
     selector: "[hideNavBar]"
 })
 export class HideNavBar implements OnInit {
-    constructor(private page: Page) {
-        console.log("hidenav")
-    }
+    constructor(private page: Page) { }
 
     ngOnInit() {
         this.page.actionBarHidden = true;

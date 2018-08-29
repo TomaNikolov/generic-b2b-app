@@ -11,13 +11,10 @@ export class CustomNavBarDirective {
 
     constructor(private injector: Injector,
         private page: Page) {
-        console.log("asdsad")
         if (this.isInsideModalDialog()) {
-            console.log("in modal")
             this.page.actionBar.title = this.params.context.title;
             this.addNavButton();
         } else {
-            console.log("NOT in modal")
             // this.page.actionBarHidden = true;
         }
     }
