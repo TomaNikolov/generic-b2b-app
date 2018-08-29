@@ -25,7 +25,6 @@ export class InboxListComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit(): void {
-        console.log("HERE?")
         if (!this._dataSubscription) {
             this._isLoading = true;
 

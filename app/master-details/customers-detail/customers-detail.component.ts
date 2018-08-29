@@ -3,7 +3,7 @@ import { RouterExtensions } from "nativescript-angular/router";
 import { ObservableArray } from "data/observable-array";
 import { ActivatedRoute } from "@angular/router";
 
-import { ModalNavBarDirective } from "~/shared/directives/modal-nav-bar.directive"
+import { CustomNavBarDirective } from "../../shared/directives/custom-nav-bar.directive"
 import { CustomersService } from "~/master-details/shared/customers.service";
 
 @Component({
@@ -15,7 +15,7 @@ export class CustomersDetailComponent implements OnInit {
     private _customer: any;
     private _categoricalSource: ObservableArray<any>;
 
-    @ViewChild(ModalNavBarDirective) modalNavBar: ModalNavBarDirective;
+    @ViewChild(CustomNavBarDirective) modalNavBar: CustomNavBarDirective;
     constructor(
         private _customersService: CustomersService,
         private _routerExtensions: RouterExtensions,

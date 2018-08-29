@@ -1,7 +1,7 @@
 import { Directive, Injector } from "@angular/core";
 import { ModalDialogParams } from "nativescript-angular/modal-dialog";
 import { ActionItem } from "tns-core-modules/ui/action-bar"
-import { Page } from "tns-core-modules/ui/page";
+import { Page, EventData } from "tns-core-modules/ui/page/page";
 
 @Directive({
     selector: "[customNavBar]"
@@ -13,10 +13,12 @@ export class CustomNavBarDirective {
         private page: Page) {
         console.log("asdsad")
         if (this.isInsideModalDialog()) {
+            console.log("in modal")
             this.page.actionBar.title = this.params.context.title;
             this.addNavButton();
         } else {
-            this.page.actionBarHidden = true;
+            console.log("NOT in modal")
+            // this.page.actionBarHidden = true;
         }
     }
 
@@ -31,6 +33,13 @@ export class CustomNavBarDirective {
         backButton.text = "Done";
         backButton.on("tap", () => this.params.closeCallback());
 
+        this.page.actionBar.actionItems.addItem(backButton);
+    }
+
+    public AddNavigationButton(title: string,  tapCallback: (args: EventData) => void) {
+        const backButton = new ActionItem();
+        backButton.text = title;
+        backButton.on("tap", tapCallback);
         this.page.actionBar.actionItems.addItem(backButton);
     }
 

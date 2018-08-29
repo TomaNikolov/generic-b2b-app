@@ -33,8 +33,4 @@ import { InboxService } from "./shared/inbox.service";
         NO_ERRORS_SCHEMA
     ]
 })
-export class InboxModule {
-    constructor() {
-        console.log("Module!")
-    }
-}
+export class InboxModule { }
