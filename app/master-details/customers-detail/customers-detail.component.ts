@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { PageRoute, RouterExtensions } from "nativescript-angular/router";
 import { switchMap } from "rxjs/operators";
 import { ObservableArray } from "data/observable-array";
+import { ActivatedRoute } from '@angular/router';
 
 import { CustomersService } from "~/master-details/shared/customers.service";
 
@@ -16,18 +17,16 @@ export class CustomersDetailComponent implements OnInit {
 
     constructor(
         private _customersService: CustomersService,
+        private activatedRoute: ActivatedRoute,
         private _pageRoute: PageRoute,
         private _routerExtensions: RouterExtensions
     ) { }
 
     ngOnInit(): void {
-        this._pageRoute.activatedRoute
-            .pipe(switchMap((activatedRoute) => activatedRoute.params))
-            .forEach((params) => {
-                const customerId = params.id;
-
-                this._customer = this._customersService.getCustomerById(customerId);
-            });
+        this.activatedRoute.params.subscribe(params => {
+            const customerId = params.id;
+            this._customer = this._customersService.getCustomerById(customerId);
+        });
 
         this._categoricalSource = new ObservableArray([
             { label: "Last month", amount: 75000 },

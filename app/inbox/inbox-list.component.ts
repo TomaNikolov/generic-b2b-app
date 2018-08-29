@@ -6,32 +6,33 @@ import { ListViewEventData } from "nativescript-ui-listview";
 import { Subscription } from "rxjs";
 import { finalize } from "rxjs/operators";
 
-import { CustomersService } from "./shared/customers.service";
+import { InboxService } from "./shared/inbox.service";
 
 @Component({
-    selector: "CustomersList",
+    selector: "InboxList",
     moduleId: module.id,
-    templateUrl: "./customers-list.component.html"
+    templateUrl: "./inbox-list.component.html"
 })
-export class CustomersListComponent implements OnInit, OnDestroy {
+export class InboxListComponent implements OnInit, OnDestroy {
     private _isLoading: boolean = false;
-    private _customers: ObservableArray<any> = new ObservableArray<any>([]);
+    private _messages: ObservableArray<any> = new ObservableArray<any>([]);
     private _dataSubscription: Subscription;
 
     constructor(
         private activatedRoute: ActivatedRoute,
-        private _customersService: CustomersService,
+        private _inboxService: InboxService,
         private _routerExtensions: RouterExtensions
     ) { }
 
     ngOnInit(): void {
+        console.log("HERE?")
         if (!this._dataSubscription) {
             this._isLoading = true;
 
-            this._dataSubscription = this._customersService.load()
+            this._dataSubscription = this._inboxService.load()
                 .pipe(finalize(() => this._isLoading = false))
-                .subscribe(customers => {
-                    this._customers = new ObservableArray(customers);
+                .subscribe(messages => {
+                    this._messages = new ObservableArray(messages);
                     this._isLoading = false;
                 });
         }
@@ -44,19 +45,19 @@ export class CustomersListComponent implements OnInit, OnDestroy {
         }
     }
 
-    get customers(): ObservableArray<any> {
-        return this._customers;
+    get messages(): ObservableArray<any> {
+        return this._messages;
     }
 
     get isLoading(): boolean {
         return this._isLoading;
     }
 
-    onCustomerItemTap(args: ListViewEventData): void {
-        const tappedCustomerItem = args.view.bindingContext;
+    onMessageItemTap(args: ListViewEventData): void {
+        const tappedInboxItem = args.view.bindingContext;
 
         // TODO: Transisions don't work when in tabs (they do in modals though)
-        this._routerExtensions.navigate(["../customer-detail", tappedCustomerItem._id],
+        this._routerExtensions.navigate(["../inbox-detail", tappedInboxItem._id],
             {
                 relativeTo: this.activatedRoute,
                 animated: true,

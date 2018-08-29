@@ -2,51 +2,40 @@
     "tabs": [
         {
             "path": "",
-            "redirectTo": "/(homeTab:home/home//galleryTab:gallery)",
+            "redirectTo": "/(agendaTab:master/customer-list//customersTab:my-customers/customer-list//reportsTab:reports/reports-list//inboxTab:inbox/inbox-list)",
             "pathMatch": "full"
         },
         {
-            "path": "home",
-            "outlet": "homeTab",
-            "loadChildren": "./home#HomeModule"
-        },
-        {
-            "path": "gallery",
-            "outlet": "galleryTab",
-            "loadChildren": "./gallery#GalleryModule"
-        }
-    ],
-    "modals": [
-        {
-            "path": "profile",
-            "loadChildren": "./profile#ProfileModule",
-            "title": "Profile"
-        },
-        {
-            "path": "terms",
-            "loadChildren": "./terms#TermsModule",
-            "title": "Terms and Conditions"
-        },
-        {
             "path": "master",
-            "title": "Master detail",
+            "outlet": "agendaTab",
             "loadChildren": "./master-details/customers.module#CustomersModule"
         },
         {
             "path": "my-customers",
-            "title": "My Customers",
+            "outlet": "customersTab",
             "loadChildren": "./my-customers/my-customers.module#MyCustomersModule"
         },
-
+        {
+            "path": "reports",
+            "outlet": "reportsTab",
+            "loadChildren": "./reports/reports.module#ReportsModule"
+        },
+        {
+            "path": "inbox",
+            "outlet": "inboxTab",
+            "loadChildren": "./inbox/inbox.module#InboxModule"
+        }
+    ],
+    "modals": [
         {
             "path": "login",
             "loadChildren": "./login/login.module#LoginModule",
             "title": "login"
         },
         {
-            "path": "reports",
-            "title": "Reports",
-            "loadChildren": "./reports/reports.module#ReportsModule"
+            "path": "profile",
+            "loadChildren": "./profile#ProfileModule",
+            "title": "Profile"
         },
         {
             "path": "place-order",

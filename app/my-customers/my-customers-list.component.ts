@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { ObservableArray } from "tns-core-modules/data/observable-array/observable-array";
-import {  } from "data/observable";
 import { ActivatedRoute } from "@angular/router";
 import { RouterExtensions } from "nativescript-angular/router";
 import { ListViewEventData } from "nativescript-ui-listview";
@@ -23,7 +22,8 @@ export class MyCustomersListComponent implements OnInit, OnDestroy {
         private activatedRoute: ActivatedRoute,
         private _customersService: CustomersService,
         private _routerExtensions: RouterExtensions
-    ) { }
+    ) {
+    }
 
     ngOnInit(): void {
         if (!this._dataSubscription) {
@@ -56,6 +56,7 @@ export class MyCustomersListComponent implements OnInit, OnDestroy {
     onCustomerItemTap(args: ListViewEventData): void {
         const tappedCustomerItem = args.view.bindingContext;
 
+        // TODO: Transisions don't work when in tabs (they do in modals though)
         this._routerExtensions.navigate(["../customer-detail", tappedCustomerItem._id],
             {
                 relativeTo: this.activatedRoute,
