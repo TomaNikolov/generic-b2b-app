@@ -1,9 +1,9 @@
 import { Component, ViewChild, ElementRef, OnInit } from "@angular/core";
-import { PageRoute, RouterExtensions } from "nativescript-angular/router";
-import { switchMap } from "rxjs/operators";
+import { RouterExtensions } from "nativescript-angular/router";
 import { map } from "rxjs/operators";
 import { CustomersService } from "~/my-customers/shared/customers.service";
 import { Http } from "@angular/http";
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: "CustomersDetail",
@@ -19,18 +19,16 @@ export class CustomersDetailComponent implements OnInit {
     @ViewChild("map") public mapbox: ElementRef;
     constructor(
         private _customersService: CustomersService,
-        private _pageRoute: PageRoute,
+        private activatedRoute: ActivatedRoute,
         private _routerExtensions: RouterExtensions,
         private http: Http
     ) { }
 
     ngOnInit(): void {
-        this._pageRoute.activatedRoute
-            .pipe(switchMap((activatedRoute) => activatedRoute.params))
-            .forEach((params) => {
-                const customerId = params.id;
-                this._customer = this._customersService.getCustomerById(customerId);
-            });
+        this.activatedRoute.params.subscribe(params => {
+            const customerId = params.id;
+            this._customer = this._customersService.getCustomerById(customerId);
+        });
     }
 
     public onMapReady(args: any) {

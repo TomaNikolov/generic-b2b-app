@@ -1,4 +1,6 @@
 <TabView androidTabsPosition="bottom" tabTextFontSize="20" class="page page-content" (loaded)="onTabViewLoaded($event)">
-	<page-router-outlet *tabItem="{ title: 'Home' }" name="homeTab"></page-router-outlet>
-	<page-router-outlet *tabItem="{ title: 'Gallery' }" name="galleryTab"></page-router-outlet>
+	<page-router-outlet *tabItem="{ title: 'Agenda' }" name="agendaTab"></page-router-outlet>
+	<page-router-outlet *tabItem="{ title: 'Customers' }" name="customersTab"></page-router-outlet>
+	<page-router-outlet *tabItem="{ title: 'Reports' }" name="reportsTab"></page-router-outlet>
+	<page-router-outlet *tabItem="{ title: 'Inbox' }" name="inboxTab"></page-router-outlet>
 </TabView>
