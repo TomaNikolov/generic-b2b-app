@@ -9,8 +9,8 @@ import { Data } from "~/place-order/providers/data"
 import { Utils } from "~/place-order/shared/utils";
 import { CustomersService } from "~/place-order/shared/customers.service"
 import { ViewChild } from "@angular/core";
-import { ModalNavBarDirective } from "~/shared/directives/modal-nav-bar.directive";
 import { ModalDialogParams } from "nativescript-angular/modal-dialog";
+import { CustomNavBarDirective } from "~/shared/directives/custom-nav-bar.directive";
 
 @Component({
     selector: "ConfirmOrder",
@@ -24,10 +24,9 @@ export class ConfirmOrderComponent implements OnInit {
     private _dataSubscription: Subscription;
     private _isLoading: boolean = false;
 
-    @ViewChild(ModalNavBarDirective) modalNavBar: ModalNavBarDirective;
+    @ViewChild(CustomNavBarDirective) customNavBar: CustomNavBarDirective;
     constructor(
         private params: ModalDialogParams,
-        private _routerExtensions: RouterExtensions,
         private _customersService: CustomersService,
         private data: Data,
         private backendService: BackendService,
@@ -49,7 +48,7 @@ export class ConfirmOrderComponent implements OnInit {
         this._products = data.products;
         this._totalOrder = data.totalOrder;
 
-        this.modalNavBar.AddCustomNavButton("Place order", () => {
+        this.customNavBar.AddCustomButton("Place order", () => {
             const newOrder = {
                 products: this.products.map(p => ({ productId: p._id, productQuantity: p.quantity })),
                 totalOrder: this.totalOrder,

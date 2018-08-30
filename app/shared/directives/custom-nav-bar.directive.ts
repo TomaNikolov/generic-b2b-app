@@ -34,6 +34,15 @@ export class CustomNavBarDirective {
         this.page.actionBarHidden = !this.page.actionBarHidden;
     }
 
+    public AddCustomButton(title: string, tapCallback: () => void) {
+        const backButton = new ActionItem();
+        backButton.text = title;
+        backButton.on("tap", () => {
+            tapCallback();
+        });
+        this.page.actionBar.actionItems.addItem(backButton);
+    }
+
     public AddModalNavigationButton(title: string, path: string, params: string[]) {
         const backButton = new ActionItem();
         backButton.text = title;
@@ -59,9 +68,7 @@ export class CustomNavBarDirective {
 
     public AddCustomNavButton(title: string, command: any[], relative: boolean, tapCallback?: () => void) {
         tapCallback = tapCallback || (() => { });
-        const backButton = new ActionItem();
-        backButton.text = title;
-        let extras : ExtendedNavigationExtras = {
+        let extras: ExtendedNavigationExtras = {
             animated: true,
             transition: {
                 name: "slide",
@@ -78,7 +85,11 @@ export class CustomNavBarDirective {
             tapCallback();
             this.zone.run(() => this._routerExtensions.navigate(command, extras));
         });
-        this.page.actionBar.actionItems.addItem(backButton);
+
+        this.AddCustomButton(title, () => {
+            tapCallback();
+            this.zone.run(() => this._routerExtensions.navigate(command, extras));
+        })
     }
 
     private addNavButton() {
