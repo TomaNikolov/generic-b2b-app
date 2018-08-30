@@ -1,8 +1,9 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { RouterExtensions } from "nativescript-angular/router";
 import { ObservableArray } from "data/observable-array";
 import { ActivatedRoute } from "@angular/router";
-
+import { TabView } from "ui/tab-view";
+import * as app from "application";
 import { CustomNavBarDirective } from "../../shared/directives/custom-nav-bar.directive"
 import { CustomersService } from "~/master-details/shared/customers.service";
 
@@ -15,7 +16,7 @@ export class CustomersDetailComponent implements OnInit {
     private _customer: any;
     private _categoricalSource: ObservableArray<any>;
 
-    @ViewChild(CustomNavBarDirective) modalNavBar: CustomNavBarDirective;
+    @ViewChild(CustomNavBarDirective) customNavBar: CustomNavBarDirective;
     constructor(
         private _customersService: CustomersService,
         private _routerExtensions: RouterExtensions,
@@ -33,8 +34,12 @@ export class CustomersDetailComponent implements OnInit {
             { label: "This month", amount: 25000 },
         ]);
 
-        this.modalNavBar.toggleNavigationBar();
-        this.modalNavBar.AddModalNavigationButton("Place order", "place-order/place-order", [this._customer._id]);
+        this.customNavBar.showNavigationBar();
+        this.customNavBar.AddModalNavigationButton("Place order", "place-order/place-order", [this._customer._id]);
+        this.customNavBar.AddCustomNavButton("View map", ['/', { outlets: { customersTab: ['my-customers', 'customer-detail', this._customer._id] } }], false, () => {
+            const tabView: TabView = <TabView>app.getRootView().getViewById("tview")
+            tabView.selectedIndex = 1;
+        });
     }
 
     get customer(): any {

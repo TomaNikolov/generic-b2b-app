@@ -8,8 +8,9 @@ import { ActivatedRoute } from "@angular/router";
 import { Data } from "~/place-order/providers/data";
 import { ProductsService } from "~/place-order/shared/products.service";
 import { Utils } from "~/place-order/shared/utils";
-import { ModalNavBarDirective } from "~/shared/directives/modal-nav-bar.directive";
 import { OrderOptions } from "./order-options.model";
+import { CustomNavBarDirective } from "~/shared/directives/custom-nav-bar.directive";
+
 
 @Component({
     selector: "productsList",
@@ -23,7 +24,7 @@ export class PlaceOrderListComponent implements OnInit, OnDestroy {
     private _customerId: string;
     private _orderOptions: OrderOptions;
 
-    @ViewChild(ModalNavBarDirective) modalNavBar: ModalNavBarDirective;
+    @ViewChild(CustomNavBarDirective) customNavBar: CustomNavBarDirective;
     constructor(
         private _productsService: ProductsService,
         private _routerExtensions: RouterExtensions,
@@ -72,23 +73,12 @@ export class PlaceOrderListComponent implements OnInit, OnDestroy {
             this._customerId = params.id;
         });
 
-        this.modalNavBar.AddCustomNavButton("Confirm order", () => {
+        this.customNavBar.AddCustomNavButton("Confirm order", ["../../confirm-order"], true, () => {
             this._data.storage = {
                 customerId: this._customerId,
                 products: this._products.filter(p => p.quantity !== 0),
                 totalOrder: this.totalOrder
             }
-
-            this._routerExtensions.navigate(["../../confirm-order"],
-                {
-                    relativeTo: this.activatedRoute,
-                    animated: true,
-                    transition: {
-                        name: "slide",
-                        duration: 200,
-                        curve: "ease"
-                    }
-                });
         });
 
         this._orderOptions = new OrderOptions("", "", "");

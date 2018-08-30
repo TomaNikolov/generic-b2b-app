@@ -1,4 +1,4 @@
-<TabView androidTabsPosition="bottom" tabTextFontSize="20" class="page page-content fa customTabView" (loaded)="onTabViewLoaded($event)">
+<TabView id="tview" androidTabsPosition="bottom" tabTextFontSize="20" class="page page-content fa customTabView" (loaded)="onTabViewLoaded($event)">
 	<page-router-outlet *tabItem="{ title: '&#xf073;' }" name="agendaTab"></page-router-outlet>
 	<page-router-outlet *tabItem="{ title: '&#xf278;' }" name="customersTab"></page-router-outlet>
 	<page-router-outlet *tabItem="{ title: '&#xf080;' }" name="reportsTab"></page-router-outlet>

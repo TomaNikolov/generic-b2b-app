@@ -4,6 +4,9 @@ import { map } from "rxjs/operators";
 import { CustomersService } from "~/my-customers/shared/customers.service";
 import { Http } from "@angular/http";
 import { ActivatedRoute } from '@angular/router';
+import { CustomNavBarDirective } from "~/shared/directives/custom-nav-bar.directive";
+import { TabView } from "tns-core-modules/ui/tab-view/tab-view";
+import * as app from "application";
 
 @Component({
     selector: "CustomersDetail",
@@ -16,6 +19,7 @@ export class CustomersDetailComponent implements OnInit {
     private _customer: any;
     private _address: any;
 
+    @ViewChild(CustomNavBarDirective) customNavBar: CustomNavBarDirective;
     @ViewChild("map") public mapbox: ElementRef;
     constructor(
         private _customersService: CustomersService,
@@ -28,6 +32,12 @@ export class CustomersDetailComponent implements OnInit {
         this.activatedRoute.params.subscribe(params => {
             const customerId = params.id;
             this._customer = this._customersService.getCustomerById(customerId);
+        });
+
+        this.customNavBar.showNavigationBar();
+        this.customNavBar.AddCustomNavButton("View details", ['/', { outlets: { agendaTab: ['master', 'customer-detail', this._customer._id] } }], false, () => {
+            const tabView: TabView = <TabView>app.getRootView().getViewById("tview")
+            tabView.selectedIndex = 0;
         });
     }
 

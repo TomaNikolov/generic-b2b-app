@@ -4,7 +4,7 @@ import { SharedModule } from "~/shared/shared.module"
 
 @Component({
     template: `
-<GridLayout modalNavBar>
+<GridLayout customNavBar>
 	<ScrollView>
 		<Label text="Profile" class="h2"></Label>
 	</ScrollView>
