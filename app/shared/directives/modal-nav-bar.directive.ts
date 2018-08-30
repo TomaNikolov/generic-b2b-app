@@ -16,7 +16,7 @@ export class ModalNavBarDirective {
         this.addNavButton();
     }
 
-    public AddNavigationButton(title: string,  tapCallback: (args: EventData) => void) {
+    public AddCustomNavButton(title: string,  tapCallback: (args: EventData) => void) {
         const backButton = new ActionItem();
         backButton.text = title;
         backButton.on("tap", tapCallback);

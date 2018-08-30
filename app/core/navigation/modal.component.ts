@@ -8,11 +8,12 @@ import { ModalDialogParams } from "nativescript-angular/modal-dialog";
 })
 export class ModalComponent implements OnInit {
 	constructor(private routerExtensions: RouterExtensions,
-				private activatedRoute: ActivatedRoute,
-				private params: ModalDialogParams) {
+		private activatedRoute: ActivatedRoute,
+		private params: ModalDialogParams) {
 	}
 
 	ngOnInit(): void {
-		this.routerExtensions.navigate([`/${this.params.context.path}`], { relativeTo: this.activatedRoute });
+		this.params.context.params = this.params.context.params || []
+		this.routerExtensions.navigate([`/${this.params.context.path}`].concat(this.params.context.params), { relativeTo: this.activatedRoute });
 	}
 }

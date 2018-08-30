@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
 import { ObservableArray } from "tns-core-modules/data/observable-array/observable-array";
-import { retry } from "rxjs/operators";
 
 @Injectable()
 export class Utils {

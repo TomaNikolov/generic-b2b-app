@@ -1,7 +1,8 @@
-import { Directive, Injector } from "@angular/core";
-import { ModalDialogParams } from "nativescript-angular/modal-dialog";
+import { Directive, Injector, NgZone, ApplicationRef } from "@angular/core";
+import { ModalDialogParams, ModalDialogOptions, ModalDialogService } from "nativescript-angular/modal-dialog";
 import { ActionItem } from "tns-core-modules/ui/action-bar"
-import { Page, EventData } from "tns-core-modules/ui/page/page";
+import { Page } from "tns-core-modules/ui/page/page";
+import { ModalComponent } from "~/core/navigation/modal.component";
 
 @Directive({
     selector: "[customNavBar]"
@@ -10,13 +11,43 @@ export class CustomNavBarDirective {
     private params: ModalDialogParams;
 
     constructor(private injector: Injector,
+        private modalDialogService: ModalDialogService,
+        private appRef: ApplicationRef,
+        private zone: NgZone,
         private page: Page) {
         if (this.isInsideModalDialog()) {
             this.page.actionBar.title = this.params.context.title;
             this.addNavButton();
         } else {
-            // this.page.actionBarHidden = true;
+            this.page.actionBarHidden = true;
         }
+    }
+
+    public toggleNavigationBar() {
+        this.page.actionBarHidden = !this.page.actionBarHidden;
+    }
+
+    public AddModalNavigationButton(title: string, path: string, params: string[]) {
+        const backButton = new ActionItem();
+        backButton.text = title;
+        backButton.on("tap", () => {
+            const options: ModalDialogOptions = {
+                context: {
+                    path: path,
+                    title: title,
+                    params: params
+                },
+                fullscreen: true,
+                // Access root viewContainerRef
+                // https://github.com/angular/angular/issues/6446#issuecomment-173459525
+                viewContainerRef: this.appRef.components[0].instance.viewContainerRef
+            };
+
+
+            this.zone.run(() => this.modalDialogService.showModal(ModalComponent, options))
+        });
+
+        this.page.actionBar.actionItems.addItem(backButton);
     }
 
     private addNavButton() {
@@ -30,13 +61,6 @@ export class CustomNavBarDirective {
         backButton.text = "Done";
         backButton.on("tap", () => this.params.closeCallback());
 
-        this.page.actionBar.actionItems.addItem(backButton);
-    }
-
-    public AddNavigationButton(title: string,  tapCallback: (args: EventData) => void) {
-        const backButton = new ActionItem();
-        backButton.text = title;
-        backButton.on("tap", tapCallback);
         this.page.actionBar.actionItems.addItem(backButton);
     }
 

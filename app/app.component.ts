@@ -12,9 +12,10 @@ import { config } from "~/core/routes-config"
 export class AppComponent implements OnInit {
 
     constructor(private modalDialogService: ModalDialogService,
-        private viewContainerRef: ViewContainerRef,
+        // Access root viewContainerRef from custom-nav-bar.directive.ts
+        public viewContainerRef: ViewContainerRef,
         private userService: UserService) {
-            // this.userService.logout()
+        // this.userService.logout()
     }
 
     ngOnInit(): void {

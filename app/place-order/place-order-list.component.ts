@@ -54,7 +54,7 @@ export class PlaceOrderListComponent implements OnInit, OnDestroy {
             this._customerId = params.id;
         });
 
-        this.modalNavBar.AddNavigationButton("Confirm order", () => {
+        this.modalNavBar.AddCustomNavButton("Confirm order", () => {
             this._data.storage = {
                 customerId: this._customerId,
                 products: this._products.filter(p => p.quantity !== 0)

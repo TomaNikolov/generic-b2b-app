@@ -33,17 +33,8 @@ export class CustomersDetailComponent implements OnInit {
             { label: "This month", amount: 25000 },
         ]);
 
-        this.modalNavBar.AddNavigationButton("Place order", () => {
-            this._routerExtensions.navigate(["place-order/place-order", this._customer._id],
-                {
-                    animated: true,
-                    transition: {
-                        name: "slide",
-                        duration: 200,
-                        curve: "ease"
-                    }
-                });
-        });
+        this.modalNavBar.toggleNavigationBar();
+        this.modalNavBar.AddModalNavigationButton("Place order", "place-order/place-order", [this._customer._id]);
     }
 
     get customer(): any {
