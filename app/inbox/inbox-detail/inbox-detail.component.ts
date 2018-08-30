@@ -32,8 +32,4 @@ export class InboxDetailComponent implements OnInit {
     get message(): any {
         return this._message;
     }
-
-    onBackButtonTap(): void {
-        this._routerExtensions.backToPreviousPage();
-    }
 }

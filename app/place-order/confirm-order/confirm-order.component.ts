@@ -61,10 +61,6 @@ export class ConfirmOrderComponent implements OnInit {
         return this._utils.getTotalOrder(this._products)
     }
 
-    onBackButtonTap(): void {
-        this._routerExtensions.backToPreviousPage();
-    }
-
     get isLoading(): boolean {
         return this._isLoading;
     }

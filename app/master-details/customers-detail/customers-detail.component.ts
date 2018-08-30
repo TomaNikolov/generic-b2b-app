@@ -44,8 +44,4 @@ export class CustomersDetailComponent implements OnInit {
     get categoricalSource(): ObservableArray<any> {
         return this._categoricalSource;
     }
-
-    onBackButtonTap(): void {
-        this._routerExtensions.backToPreviousPage();
-    }
 }

@@ -64,8 +64,4 @@ export class CustomersDetailComponent implements OnInit {
     get accessToken(): any {
         return this.mapboxToken;
     }
-
-    onBackButtonTap(): void {
-        this._routerExtensions.backToPreviousPage();
-    }
 }
