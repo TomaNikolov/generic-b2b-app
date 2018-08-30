@@ -1,17 +1,15 @@
 import { Injectable, NgZone } from "@angular/core";
 import { Observable, throwError } from "rxjs";
-const Kinvey = require("kinvey-nativescript-sdk").Kinvey;
-
-Kinvey.init();
+import { BackendService } from "../../shared/services/backend.service";
 
 @Injectable()
 export class ProductsService {
     private _products: any[] = [];
 
-    constructor() { }
+    constructor(private backendService: BackendService) { }
 
     load(): Observable<any> {
-        const products = Kinvey.DataStore.collection('products').find();
+        const products = this.backendService.getAllElements('products');
         products.subscribe(products => {
             this._products = products;
         });

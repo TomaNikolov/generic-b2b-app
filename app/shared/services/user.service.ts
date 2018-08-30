@@ -1,14 +1,15 @@
 import { Injectable } from "@angular/core";
-import { Kinvey } from "kinvey-nativescript-sdk";
 import { User } from "~/models/user.model";
+import { BackendService } from "./backend.service";
 
 @Injectable()
 export class UserService {
+    constructor(private backendService: BackendService) { }
     register(user: User) {
         return new Promise((resolve, reject) => {
-            Kinvey.User.logout()
+            this.backendService.logout()
                 .then(() => {
-                    Kinvey.User.signup({ username: user.username, password: user.password })
+                    this.backendService.signup(user.username, user.password)
                         .then(resolve)
                         .catch((error) => { this.handleErrors(error); reject(); })
                 })
@@ -18,9 +19,9 @@ export class UserService {
 
     login(user: User) {
         return new Promise((resolve, reject) => {
-            Kinvey.User.logout()
+            this.backendService.logout()
                 .then(() => {
-                    Kinvey.User.login(user.username, user.password)
+                    this.backendService.login(user.username, user.password)
                         .then(resolve)
                         .catch((error) => { this.handleErrors(error); reject(); })
                 })
@@ -29,20 +30,20 @@ export class UserService {
     }
 
     logout(): Promise<void> {
-        return Kinvey.User.logout();
+        return this.backendService.logout();
     }
 
     resetPassword(email) {
-        return Kinvey.User.resetPassword(email)
+        return this.backendService.resetPassword(email)
             .catch(this.handleErrors);
     }
 
-    handleErrors(error: Kinvey.BaseError) {
+    handleErrors(error) {
         console.error(error.message);
     }
 
     isLoginIn(): boolean {
-        const user = Kinvey.User.getActiveUser();
+        const user = this.backendService.getActiveUser();
         return !!user
     }
 }

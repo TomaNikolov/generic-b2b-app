@@ -2,15 +2,13 @@ import { Injectable, NgZone } from "@angular/core";
 import { Http } from "@angular/http";
 import { Observable, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
-const Kinvey = require("kinvey-nativescript-sdk").Kinvey;
-
-Kinvey.init();
+import { BackendService } from "../shared/services/backend.service";
 
 @Injectable()
 export class ReportsService {
     private _reports: any[] = [];
 
-    constructor(private _ngZone: NgZone) { }
+    constructor(private backendService: BackendService) { }
 
     getCustomerById(id: string): any {
         if (!id) {
@@ -21,7 +19,7 @@ export class ReportsService {
     }
 
     load(): Observable<any> {
-        const customers = Kinvey.DataStore.collection('reports').find();
+        const customers = this.backendService.getAllElements('reports');
         customers.subscribe(customers => {
             this._reports = customers;
         });

@@ -2,15 +2,14 @@ import { Injectable, NgZone } from "@angular/core";
 import { Http } from "@angular/http";
 import { Observable, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
-const Kinvey = require("kinvey-nativescript-sdk").Kinvey;
-
-Kinvey.init();
+import { BackendService } from "../../shared/services/backend.service";
 
 @Injectable()
 export class InboxService {
     private _messages: any[] = [];
 
-    constructor(private _ngZone: NgZone) { }
+    constructor(private _ngZone: NgZone,
+        private backendService: BackendService) { }
 
     getMessageById(id: string): any {
         if (!id) {
@@ -21,7 +20,7 @@ export class InboxService {
     }
 
     load(): Observable<any> {
-        const messages = Kinvey.DataStore.collection('messages').find();
+        const messages = this.backendService.getAllElements('messages');
         messages.subscribe(messagesData => {
             this._messages = messagesData;
         });

@@ -7,6 +7,9 @@ import { ModalNavBarDirective } from "./directives/modal-nav-bar.directive"
 import { HideNavBar } from "./directives/hide-nav-bar.directive"
 import { CustomNavBarDirective } from "./directives/custom-nav-bar.directive"
 
+import { BackendService } from "./services/backend.service";
+import { UserService } from "./services/user.service";
+
 @NgModule({
     imports: [
         NativeScriptCommonModule,
@@ -21,7 +24,9 @@ import { CustomNavBarDirective } from "./directives/custom-nav-bar.directive"
         CustomNavBarDirective
     ],
     providers: [
-        ModalDialogService
+        ModalDialogService,
+        BackendService,
+        UserService
     ],
     declarations: [
         HideNavBar,

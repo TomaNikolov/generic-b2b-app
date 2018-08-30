@@ -1,10 +1,12 @@
 import { Injectable } from "@angular/core";
 import { CanLoad } from "@angular/router";
-import { Kinvey } from "kinvey-nativescript-sdk";
+import { BackendService } from "./shared/services/backend.service";
 
 @Injectable()
 export class LoggedInLazyLoadGuard implements CanLoad {
+    constructor(private backendService: BackendService) { }
+
     canLoad(): boolean {
-        return !!Kinvey.User.getActiveUser();
+        return !!this.backendService.getActiveUser();
     }
 }

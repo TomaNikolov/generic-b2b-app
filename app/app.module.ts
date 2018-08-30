@@ -36,7 +36,6 @@ import { UserService } from "~/shared/services/user.service";
         ModalComponent,
     ],
     providers: [
-        UserService,
         LoggedInLazyLoadGuard
     ],
     schemas: [NO_ERRORS_SCHEMA]

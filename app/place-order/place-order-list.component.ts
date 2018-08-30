@@ -57,7 +57,8 @@ export class PlaceOrderListComponent implements OnInit, OnDestroy {
         this.modalNavBar.AddCustomNavButton("Confirm order", () => {
             this._data.storage = {
                 customerId: this._customerId,
-                products: this._products.filter(p => p.quantity !== 0)
+                products: this._products.filter(p => p.quantity !== 0),
+                totalOrder: this.totalOrder
             }
 
             this._routerExtensions.navigate(["../../confirm-order"],
@@ -85,7 +86,7 @@ export class PlaceOrderListComponent implements OnInit, OnDestroy {
     }
 
     get totalOrder() {
-        return this._utils.getTotalOrder(this._products)
+        return this._utils.getTotalOrder(this._products);
     }
 
     get isLoading(): boolean {
