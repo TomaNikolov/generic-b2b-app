@@ -1,13 +1,26 @@
 <StackLayout modalNavBar class="page page-content">
-    <GridLayout columns="*, *, *" rows="auto, auto">
-        <Label col="0" row="0" text="Category"></Label>
-        <Label col="1" row="0" text="Promo"></Label>
-        <Label col="2" row="0" text="Apply"></Label>
+    <RadDataForm tkExampleTitle tkToggleNavButton [source]="orderOptions">
+        <TKPropertyGroup tkDataFormGroups name="" hidden="false">
+            <TKDataFormGridLayout tkPropertyGroupLayout></TKDataFormGridLayout>
 
-        <!-- <ListPicker col="0" row="1" [items]="timePeriods" (selectedIndexChange)="selectedIndexChanged($event)" selectedIndex="0"></ListPicker>
-            <ListPicker col="1" row="1" [items]="statuses" (selectedIndexChange)="selectedIndexChanged($event)" selectedIndex="0" verticalAlignment="center" horizontalAlignment="center"></ListPicker>
-            <ListPicker col="2" row="1" [items]="sortBys" (selectedIndexChange)="selectedIndexChanged($event)" selectedIndex="0" verticalAlignment="center" horizontalAlignment="center"></ListPicker> -->
-    </GridLayout>
+            <TKEntityProperty tkPropertyGroupProperties index="0" columnIndex="0" name="category" displayName="Category" [valuesProvider]="categories">
+                <TKPropertyEditor tkEntityPropertyEditor type="Picker">
+                    <TKPropertyEditorStyle tkPropertyEditorStyle labelPosition="Top"></TKPropertyEditorStyle>
+                </TKPropertyEditor>
+            </TKEntityProperty>
+            <TKEntityProperty tkPropertyGroupProperties index="0" columnIndex="1" name="promo" displayName="Promo" [valuesProvider]="promos">
+                <TKPropertyEditor tkEntityPropertyEditor type="Picker">
+                    <TKPropertyEditorStyle tkPropertyEditorStyle labelPosition="Top"></TKPropertyEditorStyle>
+                </TKPropertyEditor>
+            </TKEntityProperty>
+            <TKEntityProperty tkPropertyGroupProperties index="0" columnIndex="2" name="sortBy" displayName="Sort By" [valuesProvider]="sortBys">
+                <TKPropertyEditor tkEntityPropertyEditor type="Picker">
+                    <TKPropertyEditorStyle tkPropertyEditorStyle labelPosition="Top"></TKPropertyEditorStyle>
+                </TKPropertyEditor>
+            </TKEntityProperty>
+
+        </TKPropertyGroup>
+    </RadDataForm>
 
     <StackLayout class="hr-light m-10"></StackLayout>
     <GridLayout columns="*, *" rows="auto, auto">

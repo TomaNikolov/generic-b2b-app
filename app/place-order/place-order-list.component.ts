@@ -9,7 +9,7 @@ import { Data } from "~/place-order/providers/data";
 import { ProductsService } from "~/place-order/shared/products.service";
 import { Utils } from "~/place-order/shared/utils";
 import { ModalNavBarDirective } from "~/shared/directives/modal-nav-bar.directive";
-
+import { OrderOptions } from "./order-options.model";
 
 @Component({
     selector: "productsList",
@@ -21,6 +21,7 @@ export class PlaceOrderListComponent implements OnInit, OnDestroy {
     private _products: ObservableArray<any> = new ObservableArray<any>([]);
     private _dataSubscription: Subscription;
     private _customerId: string;
+    private _orderOptions: OrderOptions;
 
     @ViewChild(ModalNavBarDirective) modalNavBar: ModalNavBarDirective;
     constructor(
@@ -30,6 +31,23 @@ export class PlaceOrderListComponent implements OnInit, OnDestroy {
         private _data: Data,
         private _utils: Utils
     ) { }
+
+    get categories(): string[] {
+        return ["Any", "Cat 1",
+            "Cat 2", "Cat 3"];
+    }
+
+    get promos(): string[] {
+        return ["Any", "Yes", "No"];
+    }
+
+    get sortBys(): string[] {
+        return ["Product name", "Last updated", "Last created", "From previous order first"];
+    }
+
+    get orderOptions(): OrderOptions {
+        return this._orderOptions;
+    }
 
     ngOnInit(): void {
         if (!this._dataSubscription) {
@@ -72,6 +90,8 @@ export class PlaceOrderListComponent implements OnInit, OnDestroy {
                     }
                 });
         });
+
+        this._orderOptions = new OrderOptions("", "", "");
     }
 
     ngOnDestroy(): void {
