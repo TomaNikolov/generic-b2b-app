@@ -1,5 +1,4 @@
 import { Component, ViewChild, ElementRef, OnInit } from "@angular/core";
-import { RouterExtensions } from "nativescript-angular/router";
 import { map } from "rxjs/operators";
 import { CustomersService } from "~/my-customers/shared/customers.service";
 import { Http } from "@angular/http";
@@ -24,7 +23,6 @@ export class CustomersDetailComponent implements OnInit {
     constructor(
         private _customersService: CustomersService,
         private activatedRoute: ActivatedRoute,
-        private _routerExtensions: RouterExtensions,
         private http: Http
     ) { }
 

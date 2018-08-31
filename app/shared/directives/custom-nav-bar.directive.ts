@@ -35,6 +35,10 @@ export class CustomNavBarDirective {
     }
 
     public AddCustomButton(title: string, tapCallback: () => void) {
+        if (this.buttonExists(title)) {
+            return;
+        }
+
         const backButton = new ActionItem();
         backButton.text = title;
         backButton.on("tap", () => {
@@ -44,6 +48,10 @@ export class CustomNavBarDirective {
     }
 
     public AddModalNavigationButton(title: string, path: string, params: string[]) {
+        if (this.buttonExists(title)) {
+            return;
+        }
+
         const backButton = new ActionItem();
         backButton.text = title;
         backButton.on("tap", () => {
@@ -81,15 +89,15 @@ export class CustomNavBarDirective {
             extras.relativeTo = this.activatedRoute;
         }
 
-        backButton.on("tap", () => {
-            tapCallback();
-            this.zone.run(() => this._routerExtensions.navigate(command, extras));
-        });
-
         this.AddCustomButton(title, () => {
             tapCallback();
             this.zone.run(() => this._routerExtensions.navigate(command, extras));
         })
+    }
+
+    private buttonExists(buttonText: string): boolean {
+        const actionItems = this.page.actionBar.actionItems.getItems();
+        return actionItems.some(actionItem => actionItem.text === buttonText);
     }
 
     private addNavButton() {
