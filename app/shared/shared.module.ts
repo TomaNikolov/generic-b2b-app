@@ -8,6 +8,7 @@ import { UserService } from "./services/user.service";
 import { NavigationService } from "./services/navigation.service";
 import { ShowNavBar } from "~/shared/directives/show-nav-bar.directive";
 import { HideNavBar } from "~/shared/directives/hide-nav-bar.directive";
+import { IfAndroidDirective, IfIosDirective } from "~/shared/directives/if-platform-directives";
 
 @NgModule({
     imports: [
@@ -19,6 +20,8 @@ import { HideNavBar } from "~/shared/directives/hide-nav-bar.directive";
         NativeScriptRouterModule,
         ShowNavBar,
         HideNavBar,
+        IfAndroidDirective,
+        IfIosDirective
     ],
     providers: [
         ModalDialogService,
@@ -29,6 +32,8 @@ import { HideNavBar } from "~/shared/directives/hide-nav-bar.directive";
     declarations: [
         ShowNavBar,
         HideNavBar,
+        IfAndroidDirective,
+        IfIosDirective
     ],
     schemas: [NO_ERRORS_SCHEMA]
 })
