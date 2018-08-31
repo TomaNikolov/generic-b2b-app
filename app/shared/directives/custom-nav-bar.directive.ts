@@ -6,7 +6,6 @@ import { ModalComponent } from "~/core/navigation/modal.component";
 import { ActivatedRoute } from "@angular/router";
 import { RouterExtensions } from "nativescript-angular/router";
 
-import * as app from "tns-core-modules/application/application";
 import { ExtendedNavigationExtras } from "nativescript-angular/router/router-extensions";
 
 @Directive({
@@ -34,27 +33,18 @@ export class CustomNavBarDirective {
         this.page.actionBarHidden = !this.page.actionBarHidden;
     }
 
-    public AddCustomButton(title: string, tapCallback: () => void) {
-        if (this.buttonExists(title)) {
-            return;
-        }
-
-        const backButton = new ActionItem();
-        backButton.text = title;
-        backButton.on("tap", () => {
+    public AddCustomButton(title: string, tapCallback: () => void): ActionItem {
+        const btn = this.getButton(title);
+        btn.on("tap", () => {
             tapCallback();
         });
-        this.page.actionBar.actionItems.addItem(backButton);
+
+        return btn;
     }
 
     public AddModalNavigationButton(title: string, path: string, params: string[]) {
-        if (this.buttonExists(title)) {
-            return;
-        }
-
-        const backButton = new ActionItem();
-        backButton.text = title;
-        backButton.on("tap", () => {
+        const btn = this.getButton(title);
+        btn.on("tap", () => {
             const options: ModalDialogOptions = {
                 context: {
                     path: path,
@@ -67,11 +57,8 @@ export class CustomNavBarDirective {
                 viewContainerRef: this.appRef.components[0].instance.viewContainerRef
             };
 
-
             this.zone.run(() => this.modalDialogService.showModal(ModalComponent, options))
         });
-
-        this.page.actionBar.actionItems.addItem(backButton);
     }
 
     public AddCustomNavButton(title: string, command: any[], relative: boolean, tapCallback?: () => void) {
@@ -95,9 +82,19 @@ export class CustomNavBarDirective {
         })
     }
 
-    private buttonExists(buttonText: string): boolean {
+    private getButton(buttonText: string): ActionItem {
         const actionItems = this.page.actionBar.actionItems.getItems();
-        return actionItems.some(actionItem => actionItem.text === buttonText);
+        let actionItem = actionItems.find(actionItem => actionItem.text === buttonText);
+
+        if (!actionItem) {
+            actionItem = new ActionItem();
+            actionItem.text = buttonText;
+            this.page.actionBar.actionItems.addItem(actionItem);
+        } else {
+            actionItem.off("tap");
+        }
+
+        return actionItem;
     }
 
     private addNavButton() {
@@ -105,13 +102,9 @@ export class CustomNavBarDirective {
             return;
         }
 
-        const backButton = new ActionItem();
-
+        const btnText = "Done";
+        const backButton  = this.AddCustomButton(btnText, () => this.params.closeCallback())
         if (backButton.ios) backButton.ios.position = "right";
-        backButton.text = "Done";
-        backButton.on("tap", () => this.params.closeCallback());
-
-        this.page.actionBar.actionItems.addItem(backButton);
     }
 
     private isInsideModalDialog() {
