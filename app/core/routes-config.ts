@@ -1,10 +1,10 @@
-const routesConfig = require("./routes-config.json");
+import { routes } from './routes';
 
-export var config = {
+export const config = {
     tabs: [
-        ...(<any>routesConfig).tabs
+        ...(<any>routes).tabs
     ],
     modals: [
-        ...(<any>routesConfig).modals
+        ...(<any>routes).modals
     ]
 };
