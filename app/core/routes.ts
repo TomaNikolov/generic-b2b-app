@@ -1,29 +1,36 @@
-{
+import { LoggedInLazyLoadGuard } from "../logged-in-lazy-load.guard";
+
+export const routes = {
     "tabs": [
         {
             "path": "",
             "redirectTo": "/(agendaTab:master/customer-list//customersTab:my-customers/customer-list//reportsTab:reports/reports-list//inboxTab:inbox/inbox-list)",
-            "pathMatch": "full"
+            "pathMatch": "full",
+            canLoad: [LoggedInLazyLoadGuard],
         },
         {
             "path": "master",
             "outlet": "agendaTab",
-            "loadChildren": "./master-details/customers.module#CustomersModule"
+            "loadChildren": "./master-details/customers.module#CustomersModule",
+            canLoad: [LoggedInLazyLoadGuard],
         },
         {
             "path": "my-customers",
             "outlet": "customersTab",
-            "loadChildren": "./my-customers/my-customers.module#MyCustomersModule"
+            "loadChildren": "./my-customers/my-customers.module#MyCustomersModule",
+            canLoad: [LoggedInLazyLoadGuard],
         },
         {
             "path": "reports",
             "outlet": "reportsTab",
-            "loadChildren": "./reports/reports.module#ReportsModule"
+            "loadChildren": "./reports/reports.module#ReportsModule",
+            canLoad: [LoggedInLazyLoadGuard],
         },
         {
             "path": "inbox",
             "outlet": "inboxTab",
-            "loadChildren": "./inbox/inbox.module#InboxModule"
+            "loadChildren": "./inbox/inbox.module#InboxModule",
+            canLoad: [LoggedInLazyLoadGuard],
         }
     ],
     "modals": [
