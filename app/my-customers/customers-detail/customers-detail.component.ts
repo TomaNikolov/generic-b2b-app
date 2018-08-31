@@ -38,14 +38,13 @@ export class CustomersDetailComponent implements OnInit {
     }
 
     public viewDetails() {
-        this.goBack()
         this._navigationService.absoluteRouterNavigation(['/', { outlets: { agendaTab: ['master', 'customer-detail', this._customer._id] } }]);
         const tabView: TabView = <TabView>app.getRootView().getViewById("tview")
         tabView.selectedIndex = 0;
     }
 
     public goBack() {
-        this._navigationService.relativeRouterNavigation(['../']);
+        this._navigationService.absoluteRouterNavigation(['/', { outlets: { customersTab: ['my-customers', 'customer-list'] } }]);
     }
 
     public onMapReady(args: any) {

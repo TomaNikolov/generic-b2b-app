@@ -46,13 +46,12 @@ export class CustomersDetailComponent implements OnInit {
     }
 
     viewMap() {
-        this.goBack();
         this._navigationService.absoluteRouterNavigation(['/', { outlets: { customersTab: ['my-customers', 'customer-detail', this._customer._id] } }]);
         const tabView: TabView = <TabView>app.getRootView().getViewById("tview")
         tabView.selectedIndex = 1;
     }
 
     goBack() {
-        this._navigationService.relativeRouterNavigation(['../']);
+        this._navigationService.absoluteRouterNavigation(['/', { outlets: { agendaTab: ['master', 'customer-list'] } }]);
     }
 }
