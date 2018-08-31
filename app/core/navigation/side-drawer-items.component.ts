@@ -8,7 +8,8 @@ import { config } from "~/core/routes-config"
 
 @Component({
 	selector: "side-drawer-items",
-	templateUrl: "./core/navigation/side-drawer-items.component.html"
+	moduleId: module.id,
+	templateUrl: "./side-drawer-items.component.html"
 })
 export class SideDrawerItemsComponent {
 	constructor(private modalDialogService: ModalDialogService,

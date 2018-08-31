@@ -1,4 +1,4 @@
-import * as routesConfig from "./routes-config.json";
+const routesConfig = require("./routes-config.json");
 
 export var config = {
     tabs: [

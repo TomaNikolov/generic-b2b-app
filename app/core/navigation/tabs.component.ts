@@ -3,7 +3,8 @@ import * as platform from "tns-core-modules/platform/platform";
 
 @Component({
     selector: "tabs",
-    templateUrl: "./core/navigation/tabs.component.html"
+    moduleId: module.id,
+    templateUrl: "./tabs.component.html"
 })
 export class TabsComponent {
     onTabViewLoaded({ object: tabView }) {
