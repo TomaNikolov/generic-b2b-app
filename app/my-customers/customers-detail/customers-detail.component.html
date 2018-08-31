@@ -1,17 +1,10 @@
-<ContentView customNavBar height="100%" width="100%">
-    <Mapbox
-        #map
-        [accessToken]="accessToken"
-        mapStyle="traffic_day"
-        latitude="37.7397"
-        longitude="-121.4252"
-        hideCompass="true"
-        zoomLevel="12"
-        showUserLocation="false"
-        disableZoom="false"
-        disableRotation="false"
-        disableScroll="false"
-        disableTilt="false"
+<ContentView showNavBar height="100%" width="100%">
+    <ActionBar title="">
+        <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" (tap)="goBack()"></NavigationButton>
+        <ActionItem text="View details" ios.position="right" (tap)="viewDetails()"></ActionItem>
+    </ActionBar>
+    <Mapbox #map [accessToken]="accessToken" mapStyle="traffic_day" latitude="37.7397" longitude="-121.4252" hideCompass="true"
+        zoomLevel="12" showUserLocation="false" disableZoom="false" disableRotation="false" disableScroll="false" disableTilt="false"
         (mapReady)="onMapReady($event)">
     </Mapbox>
 </ContentView>

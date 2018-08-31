@@ -1,11 +1,10 @@
-import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
-import { RouterExtensions } from "nativescript-angular/router";
+import { Component, OnInit } from "@angular/core";
 import { ObservableArray } from "data/observable-array";
 import { ActivatedRoute } from "@angular/router";
 import { TabView } from "ui/tab-view";
-import * as app from "application";
-import { CustomNavBarDirective } from "../../shared/directives/custom-nav-bar.directive"
 import { CustomersService } from "~/master-details/shared/customers.service";
+import { NavigationService } from "~/shared/services/navigation.service";
+import * as app from "tns-core-modules/application/application";
 
 @Component({
     selector: "CustomersDetail",
@@ -16,15 +15,14 @@ export class CustomersDetailComponent implements OnInit {
     private _customer: any;
     private _categoricalSource: ObservableArray<any>;
 
-    @ViewChild(CustomNavBarDirective) customNavBar: CustomNavBarDirective;
     constructor(
+        private _navigationService: NavigationService,
         private _customersService: CustomersService,
-        private _routerExtensions: RouterExtensions,
-        private activatedRoute: ActivatedRoute,
+        private _activatedRoute: ActivatedRoute,
     ) { }
 
     ngOnInit(): void {
-        this.activatedRoute.params.subscribe(params => {
+        this._activatedRoute.params.subscribe(params => {
             const customerId = params.id;
             this._customer = this._customersService.getCustomerById(customerId);
         });
@@ -33,13 +31,6 @@ export class CustomersDetailComponent implements OnInit {
             { label: "Last month", amount: 75000 },
             { label: "This month", amount: 25000 },
         ]);
-
-        this.customNavBar.showNavigationBar();
-        this.customNavBar.AddModalNavigationButton("Place order", "place-order/place-order", [this._customer._id]);
-        this.customNavBar.AddCustomNavButton("View map", ['/', { outlets: { customersTab: ['my-customers', 'customer-detail', this._customer._id] } }], false, () => {
-            const tabView: TabView = <TabView>app.getRootView().getViewById("tview")
-            tabView.selectedIndex = 1;
-        });
     }
 
     get customer(): any {
@@ -48,5 +39,20 @@ export class CustomersDetailComponent implements OnInit {
 
     get categoricalSource(): ObservableArray<any> {
         return this._categoricalSource;
+    }
+
+    placeOrder() {
+        this._navigationService.navigateToModal("Place order", "place-order/place-order", [this._customer._id]);
+    }
+
+    viewMap() {
+        this.goBack();
+        this._navigationService.absoluteRouterNavigation(['/', { outlets: { customersTab: ['my-customers', 'customer-detail', this._customer._id] } }]);
+        const tabView: TabView = <TabView>app.getRootView().getViewById("tview")
+        tabView.selectedIndex = 1;
+    }
+
+    goBack() {
+        this._navigationService.relativeRouterNavigation(['../']);
     }
 }

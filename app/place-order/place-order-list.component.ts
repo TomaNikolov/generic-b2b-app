@@ -2,14 +2,14 @@ import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { ObservableArray } from "tns-core-modules/data/observable-array/observable-array";
 import { Subscription } from "rxjs";
 import { finalize } from "rxjs/operators";
-import { RouterExtensions } from "nativescript-angular/router";
 import { ActivatedRoute } from "@angular/router";
 
 import { Data } from "~/place-order/providers/data";
 import { ProductsService } from "~/place-order/shared/products.service";
 import { Utils } from "~/place-order/shared/utils";
 import { OrderOptions } from "./order-options.model";
-import { CustomNavBarDirective } from "~/shared/directives/custom-nav-bar.directive";
+import { NavigationService } from "~/shared/services/navigation.service";
+import { ModalDialogParams } from "nativescript-angular/modal-dialog";
 
 
 @Component({
@@ -24,31 +24,14 @@ export class PlaceOrderListComponent implements OnInit, OnDestroy {
     private _customerId: string;
     private _orderOptions: OrderOptions;
 
-    @ViewChild(CustomNavBarDirective) customNavBar: CustomNavBarDirective;
     constructor(
         private _productsService: ProductsService,
-        private _routerExtensions: RouterExtensions,
-        private activatedRoute: ActivatedRoute,
+        private _activatedRoute: ActivatedRoute,
         private _data: Data,
-        private _utils: Utils
+        private _utils: Utils,
+        private _navigationService: NavigationService,
+        private _modalDialogParams: ModalDialogParams,
     ) { }
-
-    get categories(): string[] {
-        return ["Any", "Cat 1",
-            "Cat 2", "Cat 3"];
-    }
-
-    get promos(): string[] {
-        return ["Any", "Yes", "No"];
-    }
-
-    get sortBys(): string[] {
-        return ["Product name", "Last updated", "Last created", "From previous order first"];
-    }
-
-    get orderOptions(): OrderOptions {
-        return this._orderOptions;
-    }
 
     ngOnInit(): void {
         if (!this._dataSubscription) {
@@ -69,16 +52,8 @@ export class PlaceOrderListComponent implements OnInit, OnDestroy {
                 });
         }
 
-        this.activatedRoute.params.subscribe(params => {
+        this._activatedRoute.params.subscribe(params => {
             this._customerId = params.id;
-        });
-
-        this.customNavBar.AddCustomNavButton("Confirm order", ["../../confirm-order"], true, () => {
-            this._data.storage = {
-                customerId: this._customerId,
-                products: this._products.filter(p => p.quantity !== 0),
-                totalOrder: this.totalOrder
-            }
         });
 
         this._orderOptions = new OrderOptions("", "", "");
@@ -91,6 +66,23 @@ export class PlaceOrderListComponent implements OnInit, OnDestroy {
         }
     }
 
+    get categories(): string[] {
+        return ["Any", "Cat 1",
+            "Cat 2", "Cat 3"];
+    }
+
+    get promos(): string[] {
+        return ["Any", "Yes", "No"];
+    }
+
+    get sortBys(): string[] {
+        return ["Product name", "Last updated", "Last created", "From previous order first"];
+    }
+
+    get orderOptions(): OrderOptions {
+        return this._orderOptions;
+    }
+
     get products(): ObservableArray<any> {
         return this._products;
     }
@@ -101,5 +93,19 @@ export class PlaceOrderListComponent implements OnInit, OnDestroy {
 
     get isLoading(): boolean {
         return this._isLoading;
+    }
+
+    confirmOrder() {
+        this._data.storage = {
+            customerId: this._customerId,
+            products: this._products.filter(p => p.quantity !== 0),
+            totalOrder: this.totalOrder
+        };
+
+        this._navigationService.relativeRouterNavigation(["../../confirm-order"], this._activatedRoute);
+    }
+
+    goBack() {
+        this._modalDialogParams.closeCallback()
     }
 }

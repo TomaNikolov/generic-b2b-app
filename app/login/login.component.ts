@@ -20,8 +20,9 @@ export class LoginComponent implements OnInit {
 	@ViewChild("password") password: ElementRef;
 	@ViewChild("confirmPassword") confirmPassword: ElementRef;
 
-	constructor(private page: Page, private userService: UserService, private params: ModalDialogParams) {
-		this.page.actionBarHidden = true;
+	constructor(private _page: Page,
+		private _userService: UserService,
+		private _params: ModalDialogParams) {
 		this.user = new User();
 		this.user.password = "admin";
 		this.user.username = "admin"
@@ -29,8 +30,8 @@ export class LoginComponent implements OnInit {
 
 	ngOnInit(): void {
 		if (app.android) {
-			this.page.on("loaded", () => {
-				this.page.frame.on("activityBackPressed", (args: any) => {
+			this._page.on("loaded", () => {
+				this._page.frame.on("activityBackPressed", (args: any) => {
 					args.cancel = true;
 					// global.android.os.Process.killProcess(global.android.os.Process.myPid());
 					app.android.foregroundActivity.moveTaskToBack(true);
@@ -38,7 +39,6 @@ export class LoginComponent implements OnInit {
 			});
 		}
 	}
-
 
 	toggleForm() {
 		this.isLoggingIn = !this.isLoggingIn;
@@ -58,9 +58,9 @@ export class LoginComponent implements OnInit {
 	}
 
 	login() {
-		this.userService.login(this.user)
+		this._userService.login(this.user)
 			.then(() => {
-				this.params.closeCallback(this.user);
+				this._params.closeCallback(this.user);
 			})
 			.catch(() => {
 				this.alert("Unfortunately we could not find your account.");
@@ -72,7 +72,7 @@ export class LoginComponent implements OnInit {
 			this.alert("Your passwords do not match.");
 			return;
 		}
-		this.userService.register(this.user)
+		this._userService.register(this.user)
 			.then(() => {
 				this.alert("Your account was successfully created.");
 				this.isLoggingIn = true;
@@ -92,7 +92,7 @@ export class LoginComponent implements OnInit {
 			cancelButtonText: "Cancel"
 		}).then((data) => {
 			if (data.result) {
-				this.userService.resetPassword(data.text.trim())
+				this._userService.resetPassword(data.text.trim())
 					.then(() => {
 						this.alert("Your password was successfully reset. Please check your email for instructions on choosing a new password.");
 					}).catch(() => {

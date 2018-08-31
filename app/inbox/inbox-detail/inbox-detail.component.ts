@@ -1,10 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { PageRoute, RouterExtensions } from "nativescript-angular/router";
-import { switchMap } from "rxjs/operators";
-import { ObservableArray } from "data/observable-array";
 import { ActivatedRoute } from '@angular/router';
-
 import { InboxService } from "../shared/inbox.service";
+import { NavigationService } from "~/shared/services/navigation.service";
 
 @Component({
     selector: "InboxDetail",
@@ -16,13 +13,12 @@ export class InboxDetailComponent implements OnInit {
 
     constructor(
         private _inboxService: InboxService,
-        private activatedRoute: ActivatedRoute,
-        private _pageRoute: PageRoute,
-        private _routerExtensions: RouterExtensions
+        private _activatedRoute: ActivatedRoute,
+        private _navigationService: NavigationService,
     ) { }
 
     ngOnInit(): void {
-        this.activatedRoute.params.subscribe(params => {
+        this._activatedRoute.params.subscribe(params => {
             const messageId = params.id;
             this._message = this._inboxService.getMessageById(messageId);
         });
@@ -31,5 +27,9 @@ export class InboxDetailComponent implements OnInit {
 
     get message(): any {
         return this._message;
+    }
+
+    goBack() {
+        this._navigationService.relativeRouterNavigation(['../']);
     }
 }

@@ -1,4 +1,4 @@
-<GridLayout customNavBar class="page page-content">
+<GridLayout hideNavBar class="page page-content">
     <RadListView [items]="customers" (itemTap)="onCustomerItemTap($event)" class="list-group">
         <ng-template tkListItemTemplate let-customer="item">
             <GridLayout class="list-group-item" rows="auto, *, *" columns="auto">

@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { ObservableArray } from "data/observable-array";
 import { ActivatedRoute } from "@angular/router";
-import { RouterExtensions } from "nativescript-angular/router";
 import { ListViewEventData } from "nativescript-ui-listview";
 import { Subscription } from "rxjs";
 import { finalize } from "rxjs/operators";
 
 import { InboxService } from "./shared/inbox.service";
+import { NavigationService } from "~/shared/services/navigation.service";
 
 @Component({
     selector: "InboxList",
@@ -19,9 +19,10 @@ export class InboxListComponent implements OnInit, OnDestroy {
     private _dataSubscription: Subscription;
 
     constructor(
-        private activatedRoute: ActivatedRoute,
+        private _activatedRoute: ActivatedRoute,
         private _inboxService: InboxService,
-        private _routerExtensions: RouterExtensions
+        private _navigationService: NavigationService,
+
     ) { }
 
     ngOnInit(): void {
@@ -54,17 +55,6 @@ export class InboxListComponent implements OnInit, OnDestroy {
 
     onMessageItemTap(args: ListViewEventData): void {
         const tappedInboxItem = args.view.bindingContext;
-
-        // TODO: Transisions don't work when in tabs (they do in modals though)
-        this._routerExtensions.navigate(["../inbox-detail", tappedInboxItem._id],
-            {
-                relativeTo: this.activatedRoute,
-                animated: true,
-                transition: {
-                    name: "slide",
-                    duration: 200,
-                    curve: "ease"
-                }
-            });
+        this._navigationService.relativeRouterNavigation(["../inbox-detail", tappedInboxItem._id], this._activatedRoute);
     }
 }

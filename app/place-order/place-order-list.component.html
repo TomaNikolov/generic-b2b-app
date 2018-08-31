@@ -1,58 +1,63 @@
-<StackLayout customNavBar class="page page-content">
-    <RadDataForm tkExampleTitle tkToggleNavButton [source]="orderOptions">
-        <TKPropertyGroup tkDataFormGroups name="" hidden="false">
-            <TKDataFormGridLayout tkPropertyGroupLayout></TKDataFormGridLayout>
+<StackLayout showNavBar customNavBar class="page page-content">
+    <ActionBar title="">
+        <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" (tap)="goBack()"></NavigationButton>
+        <ActionItem text="Confirm order" ios.position="right" (tap)="confirmOrder()"></ActionItem>
+    </ActionBar>
+    <StackLayout>
+        <RadDataForm tkExampleTitle tkToggleNavButton [source]="orderOptions">
+            <TKPropertyGroup tkDataFormGroups name="" hidden="false">
+                <TKDataFormGridLayout tkPropertyGroupLayout></TKDataFormGridLayout>
 
-            <TKEntityProperty tkPropertyGroupProperties index="0" columnIndex="0" name="category" displayName="Category" [valuesProvider]="categories">
-                <TKPropertyEditor tkEntityPropertyEditor type="Picker">
-                    <TKPropertyEditorStyle tkPropertyEditorStyle labelPosition="Top"></TKPropertyEditorStyle>
-                </TKPropertyEditor>
-            </TKEntityProperty>
-            <TKEntityProperty tkPropertyGroupProperties index="0" columnIndex="1" name="promo" displayName="Promo" [valuesProvider]="promos">
-                <TKPropertyEditor tkEntityPropertyEditor type="Picker">
-                    <TKPropertyEditorStyle tkPropertyEditorStyle labelPosition="Top"></TKPropertyEditorStyle>
-                </TKPropertyEditor>
-            </TKEntityProperty>
-            <TKEntityProperty tkPropertyGroupProperties index="0" columnIndex="2" name="sortBy" displayName="Sort By" [valuesProvider]="sortBys">
-                <TKPropertyEditor tkEntityPropertyEditor type="Picker">
-                    <TKPropertyEditorStyle tkPropertyEditorStyle labelPosition="Top"></TKPropertyEditorStyle>
-                </TKPropertyEditor>
-            </TKEntityProperty>
+                <TKEntityProperty tkPropertyGroupProperties index="0" columnIndex="0" name="category" displayName="Category" [valuesProvider]="categories">
+                    <TKPropertyEditor tkEntityPropertyEditor type="Picker">
+                        <TKPropertyEditorStyle tkPropertyEditorStyle labelPosition="Top"></TKPropertyEditorStyle>
+                    </TKPropertyEditor>
+                </TKEntityProperty>
+                <TKEntityProperty tkPropertyGroupProperties index="0" columnIndex="1" name="promo" displayName="Promo" [valuesProvider]="promos">
+                    <TKPropertyEditor tkEntityPropertyEditor type="Picker">
+                        <TKPropertyEditorStyle tkPropertyEditorStyle labelPosition="Top"></TKPropertyEditorStyle>
+                    </TKPropertyEditor>
+                </TKEntityProperty>
+                <TKEntityProperty tkPropertyGroupProperties index="0" columnIndex="2" name="sortBy" displayName="Sort By" [valuesProvider]="sortBys">
+                    <TKPropertyEditor tkEntityPropertyEditor type="Picker">
+                        <TKPropertyEditorStyle tkPropertyEditorStyle labelPosition="Top"></TKPropertyEditorStyle>
+                    </TKPropertyEditor>
+                </TKEntityProperty>
 
-        </TKPropertyGroup>
-    </RadDataForm>
+            </TKPropertyGroup>
+        </RadDataForm>
 
-    <StackLayout class="hr-light m-10"></StackLayout>
-    <GridLayout columns="*, *" rows="auto, auto">
-        <Label col="0" row="0" text="Order Total"></Label>
-        <Label col="1" row="0" [text]="totalOrder" class="text-right"></Label>
-    </GridLayout>
+        <StackLayout class="hr-light m-10"></StackLayout>
+        <GridLayout columns="*, *" rows="auto, auto">
+            <Label col="0" row="0" text="Order Total"></Label>
+            <Label col="1" row="0" [text]="totalOrder" class="text-right"></Label>
+        </GridLayout>
 
-    <StackLayout class="hr-light m-10"></StackLayout>
+        <StackLayout class="hr-light m-10"></StackLayout>
 
-    <GridLayout columns="*, *, *, *, *, *" rows="auto">
-        <Label col="0" row="0" text="Product Name"></Label>
-        <Label col="1" row="0" text="Unit Price"></Label>
-        <Label col="2" row="0" text="Unit In Stock"></Label>
-        <Label col="3" row="0" text="Promo"></Label>
-        <Label col="4" row="0" text="Quantity"></Label>
-        <Label col="5" row="0" text="Total"></Label>
-    </GridLayout>
+        <GridLayout columns="*, *, *, *, *, *" rows="auto">
+            <Label col="0" row="0" text="Product Name"></Label>
+            <Label col="1" row="0" text="Unit Price"></Label>
+            <Label col="2" row="0" text="Unit In Stock"></Label>
+            <Label col="3" row="0" text="Promo"></Label>
+            <Label col="4" row="0" text="Quantity"></Label>
+            <Label col="5" row="0" text="Total"></Label>
+        </GridLayout>
 
-    <GridLayout>
-        <ActivityIndicator [busy]="isLoading"></ActivityIndicator>
-        <RadListView [items]="products" class="list-group">
-            <ng-template tkListItemTemplate let-product="item">
-                <GridLayout columns="*, *, *, *, *, *" rows="auto">
-                    <Label col="0" [text]="product.productName"></Label>
-                    <Label col="1" [text]="product.unitPrice"></Label>
-                    <Label col="2" [text]="product.unitInStock"></Label>
-                    <Label col="3" [text]="product.promo | questionableBoolean"></Label>
-                    <TextField col="4" keyboardType="number" [(ngModel)]="product.quantity"></TextField>
-                    <Label col="5" [text]="product.quantity | totalPrice: product.unitPrice"></Label>
-                </GridLayout>
-            </ng-template>
-        </RadListView>
+        <GridLayout>
+            <ActivityIndicator [busy]="isLoading"></ActivityIndicator>
+            <RadListView [items]="products" class="list-group">
+                <ng-template tkListItemTemplate let-product="item">
+                    <GridLayout columns="*, *, *, *, *, *" rows="auto">
+                        <Label col="0" [text]="product.productName"></Label>
+                        <Label col="1" [text]="product.unitPrice"></Label>
+                        <Label col="2" [text]="product.unitInStock"></Label>
+                        <Label col="3" [text]="product.promo | questionableBoolean"></Label>
+                        <TextField col="4" keyboardType="number" [(ngModel)]="product.quantity"></TextField>
+                        <Label col="5" [text]="product.quantity | totalPrice: product.unitPrice"></Label>
+                    </GridLayout>
+                </ng-template>
+            </RadListView>
 
-    </GridLayout>
-</StackLayout>
+        </GridLayout>
+    </StackLayout>

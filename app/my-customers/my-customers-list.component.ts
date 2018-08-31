@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { ObservableArray } from "tns-core-modules/data/observable-array/observable-array";
-import { ActivatedRoute } from "@angular/router";
-import { RouterExtensions } from "nativescript-angular/router";
+import { ObservableArray } from "tns-core-modules/data/observable-array/observable-array";;
 import { ListViewEventData } from "nativescript-ui-listview";
 import { Subscription } from "rxjs";
 import { finalize } from "rxjs/operators";
 
 import { CustomersService } from "~/my-customers/shared/customers.service";
+import { NavigationService } from "~/shared/services/navigation.service";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
     selector: "CustomersList",
@@ -19,9 +19,9 @@ export class MyCustomersListComponent implements OnInit, OnDestroy {
     private _dataSubscription: Subscription;
 
     constructor(
-        private activatedRoute: ActivatedRoute,
         private _customersService: CustomersService,
-        private _routerExtensions: RouterExtensions
+        private _navigationService: NavigationService,
+        private _activatedRoute: ActivatedRoute,
     ) {
     }
 
@@ -55,17 +55,6 @@ export class MyCustomersListComponent implements OnInit, OnDestroy {
 
     onCustomerItemTap(args: ListViewEventData): void {
         const tappedCustomerItem = args.view.bindingContext;
-
-        // TODO: Transisions don't work when in tabs (they do in modals though)
-        this._routerExtensions.navigate(["../customer-detail", tappedCustomerItem._id],
-            {
-                relativeTo: this.activatedRoute,
-                animated: true,
-                transition: {
-                    name: "slide",
-                    duration: 200,
-                    curve: "ease"
-                }
-            });
+        this._navigationService.relativeRouterNavigation(["../customer-detail", tappedCustomerItem._id], this._activatedRoute);
     }
 }

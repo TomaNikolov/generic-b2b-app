@@ -1,13 +1,8 @@
-import { Component, OnDestroy, OnInit, ViewChild, ElementRef, EventEmitter, Output } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { ObservableArray } from "data/observable-array";
-import { AnimationCurve } from "ui/enums";
-import { ReportsService } from "./reports.service";
-import { ListViewEventData } from "nativescript-ui-listview";
-import { ActivatedRoute } from "@angular/router";
+import { ReportsService } from "./reports.service";;
 import { Subscription } from "rxjs";
 import { finalize } from "rxjs/operators";
-import { RouterExtensions } from "nativescript-angular/router";
-import { ListPicker } from "ui/list-picker";
 import { Report } from "./report.model";
 
 let pokemonList = ["Bulbasaur", "Parasect", "Venonat", "Venomoth", "Diglett",
@@ -24,11 +19,7 @@ export class ReportsListComponent implements OnInit, OnDestroy {
     private _isLoading: boolean = false;
     private _report: Report;
 
-    constructor(
-        private activatedRoute: ActivatedRoute,
-        private _reportsService: ReportsService,
-        private _routerExtensions: RouterExtensions
-    ) {
+    constructor(private _reportsService: ReportsService) {
         this._report = new Report("", "", "");
     }
 

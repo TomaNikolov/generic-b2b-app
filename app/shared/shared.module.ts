@@ -3,10 +3,11 @@ import { NativeScriptCommonModule } from "nativescript-angular/common";
 import { NativeScriptRouterModule } from "nativescript-angular/router";
 import { ModalDialogService } from "nativescript-angular/modal-dialog";
 
-import { CustomNavBarDirective } from "./directives/custom-nav-bar.directive"
-
 import { BackendService } from "./services/backend.service";
 import { UserService } from "./services/user.service";
+import { NavigationService } from "./services/navigation.service";
+import { ShowNavBar } from "~/shared/directives/show-nav-bar.directive";
+import { HideNavBar } from "~/shared/directives/hide-nav-bar.directive";
 
 @NgModule({
     imports: [
@@ -16,16 +17,18 @@ import { UserService } from "./services/user.service";
     exports: [
         NativeScriptCommonModule,
         NativeScriptRouterModule,
-
-        CustomNavBarDirective
+        ShowNavBar,
+        HideNavBar,
     ],
     providers: [
         ModalDialogService,
         BackendService,
-        UserService
+        UserService,
+        NavigationService
     ],
     declarations: [
-        CustomNavBarDirective
+        ShowNavBar,
+        HideNavBar,
     ],
     schemas: [NO_ERRORS_SCHEMA]
 })
