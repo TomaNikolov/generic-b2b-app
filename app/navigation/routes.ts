@@ -40,6 +40,11 @@ export const routes = {
             "title": "login"
         },
         {
+            "path": "anonymous-login",
+            "loadChildren": "./anonymous-login/anonymous-login.module#AnonymousLoginModule",
+            "title": "login"
+        },
+        {
             "path": "profile",
             "loadChildren": "./profile#ProfileModule",
             "title": "Profile"
