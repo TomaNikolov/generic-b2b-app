@@ -30,6 +30,6 @@ export class InboxDetailComponent implements OnInit {
     }
 
     goBack() {
-        this._navigationService.relativeRouterNavigation(['../']);
+        this._navigationService.absoluteRouterNavigation(['/', { outlets: { inboxTab: ['inbox', 'inbox-list'] } }]);
     }
 }
