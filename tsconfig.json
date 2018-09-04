@@ -5,7 +5,7 @@
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
         "noEmitHelpers": true,
-        "noEmitOnError": true,
+        "noEmitOnError": false,
         "lib": [
             "es6",
             "dom",
@@ -26,6 +26,7 @@
         "node_modules",
         "platforms",
         "typings",
+        "**/*.aot.ts",
         "additional-models"
     ]
 }

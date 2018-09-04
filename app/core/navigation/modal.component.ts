@@ -13,7 +13,6 @@ export class ModalComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.params.context.params = this.params.context.params || []
-		this.routerExtensions.navigate([`/${this.params.context.path}`].concat(this.params.context.params), { relativeTo: this.activatedRoute });
+		this.routerExtensions.navigate(this.params.context.command, { relativeTo: this.activatedRoute });
 	}
 }

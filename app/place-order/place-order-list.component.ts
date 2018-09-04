@@ -10,7 +10,7 @@ import { Utils } from "~/place-order/shared/utils";
 import { OrderOptions } from "./order-options.model";
 import { NavigationService } from "~/shared/services/navigation.service";
 import { ModalDialogParams } from "nativescript-angular/modal-dialog";
-
+import { GoBackModalDirective } from "~/shared/directives/go-back-modal.directive";
 
 @Component({
     selector: "productsList",
@@ -24,14 +24,13 @@ export class PlaceOrderListComponent implements OnInit, OnDestroy {
     private _customerId: string;
     private _orderOptions: OrderOptions;
 
+    @ViewChild(GoBackModalDirective) goBackModalDirective: GoBackModalDirective;
     constructor(
         private _productsService: ProductsService,
         private _activatedRoute: ActivatedRoute,
         private _data: Data,
         private _utils: Utils,
-        private _navigationService: NavigationService,
-        private _modalDialogParams: ModalDialogParams,
-    ) { }
+        private _navigationService: NavigationService) { }
 
     ngOnInit(): void {
         if (!this._dataSubscription) {
@@ -102,10 +101,10 @@ export class PlaceOrderListComponent implements OnInit, OnDestroy {
             totalOrder: this.totalOrder
         };
 
-        this._navigationService.relativeRouterNavigation(["../../confirm-order"], this._activatedRoute);
+        this._navigationService.navigateTo(["../../confirm-order"], this._activatedRoute);
     }
 
     goBack() {
-        this._modalDialogParams.closeCallback()
+        this.goBackModalDirective.goBack();
     }
 }

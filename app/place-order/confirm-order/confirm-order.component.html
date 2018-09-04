@@ -1,9 +1,8 @@
-<StackLayout showNavBar class="page page-content">
+<StackLayout showNavBar goBack class="page page-content">
     <ActionBar title="">
         <NavigationButton *ifAndroid android.systemIcon="ic_menu_back" (tap)="goBack()"></NavigationButton>
         <NavigationButton *ifIos visibility="collapse"></NavigationButton>
         <ActionItem *ifIos ios.systemIcon="8" (tap)="goBack()"></ActionItem>
-
         <ActionItem text="Submit order" ios.position="right" (tap)="submitOrder()"></ActionItem>
     </ActionBar>
     <StackLayout *ngIf="customer | async; let customer; else loading">

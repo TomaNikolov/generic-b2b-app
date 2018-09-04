@@ -1,11 +1,11 @@
-import { Injectable } from "@angular/core";
+import { Injectable, ViewContainerRef } from "@angular/core";
 import { NgZone, ApplicationRef } from "@angular/core";
 import { ModalDialogOptions, ModalDialogService } from "nativescript-angular/modal-dialog";
 import { ModalComponent } from "~/core/navigation/modal.component";
 import { ActivatedRoute } from "@angular/router";
 import { RouterExtensions } from "nativescript-angular/router";
 import { ExtendedNavigationExtras } from "nativescript-angular/router/router-extensions";
-
+import * as app from "tns-core-modules/application/application";
 
 @Injectable()
 export class NavigationService {
@@ -13,14 +13,34 @@ export class NavigationService {
         private _appRef: ApplicationRef,
         private _zone: NgZone,
         private _routerExtensions: RouterExtensions,
-        private _activatedRoute?: ActivatedRoute) { }
+        private _activatedRoute: ActivatedRoute, ) { }
 
-    public navigateToModal(title: string, path: string, params: string[]) {
+
+    public navigateTo(command: any[], activatedRoute?: ActivatedRoute) {
+        if (this.isInsideModal()) {
+            this.routerNavigation(command, activatedRoute);
+        } else {
+            this.navigateToModal(command);
+        }
+    }
+
+    public absoluteRouterNavigation(command: any[]) {
+        this.routerNavigation(command);
+    }
+
+    public relativeRouterNavigation(command: any[], activatedRoute?: ActivatedRoute) {
+        activatedRoute = activatedRoute || this._activatedRoute;
+        this.routerNavigation(command, activatedRoute);
+    }
+
+    public goBack() {
+        this._routerExtensions.canGoBackToPreviousPage()
+    }
+
+    private navigateToModal(command: string[]) {
         const options: ModalDialogOptions = {
             context: {
-                path: path,
-                title: title,
-                params: params
+                command: command
             },
             fullscreen: true,
             // Access root viewContainerRef
@@ -31,17 +51,8 @@ export class NavigationService {
         this._zone.run(() => this.modalDialogService.showModal(ModalComponent, options))
     }
 
-    public absoluteRouterNavigation(command: any[]) {
-         this.routerNavigation(command);
-    }
-
-    public relativeRouterNavigation(command: any[], activatedRoute?: ActivatedRoute) {
-        activatedRoute = activatedRoute || this._activatedRoute;
-         this.routerNavigation(command, activatedRoute);
-    }
-
-    public goBack() {
-        this._routerExtensions.backToPreviousPage();
+    private isInsideModal() {
+        return app.getRootView() && app.getRootView().modal
     }
 
     private routerNavigation(command: any[], activatedRoute?: ActivatedRoute) {

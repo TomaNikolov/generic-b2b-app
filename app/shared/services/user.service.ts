@@ -42,7 +42,7 @@ export class UserService {
         console.error(error.message);
     }
 
-    isLoginIn(): boolean {
+    isLoggedIn(): boolean {
         const user = this.backendService.getActiveUser();
         return !!user
     }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { finalize } from "rxjs/operators";
 import { Subscription, of, Observable } from "rxjs";
 import { share } from 'rxjs/operators';
@@ -7,6 +7,7 @@ import { BackendService } from "../../shared/services/backend.service";
 import { Data } from "~/place-order/providers/data"
 import { CustomersService } from "~/place-order/shared/customers.service"
 import { ModalDialogParams } from "nativescript-angular/modal-dialog";
+import { GoBackModalDirective } from "~/shared/directives/go-back-modal.directive";
 import { NavigationService } from "~/shared/services/navigation.service";
 
 @Component({
@@ -21,6 +22,7 @@ export class ConfirmOrderComponent implements OnInit {
     private _dataSubscription: Subscription;
     private _isLoading: boolean = false;
 
+    @ViewChild(GoBackModalDirective) goBackModalDirective: GoBackModalDirective;
     constructor(
         private params: ModalDialogParams,
         private _customersService: CustomersService,
@@ -31,7 +33,6 @@ export class ConfirmOrderComponent implements OnInit {
 
     ngOnInit(): void {
         const data = this.data.storage;
-
         if (!this._dataSubscription) {
             this._isLoading = true;
             this._customersService.load()
@@ -78,12 +79,12 @@ export class ConfirmOrderComponent implements OnInit {
         };
 
         this.backendService.save("orders", newOrder)
-            .then(orderInDb => {
+            .then(() => {
                 this.params.closeCallback();
             });
     }
 
     goBack() {
-        this._navigationService.goBack()
+        this.goBackModalDirective.goBack();
     }
 }

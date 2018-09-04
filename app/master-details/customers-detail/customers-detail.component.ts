@@ -42,7 +42,7 @@ export class CustomersDetailComponent implements OnInit {
     }
 
     placeOrder() {
-        this._navigationService.navigateToModal("Place order", "place-order/place-order", [this._customer._id]);
+        this._navigationService.navigateTo(["place-order", "place-order", this._customer._id]);
     }
 
     viewMap() {
