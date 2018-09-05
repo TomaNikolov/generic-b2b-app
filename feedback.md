@@ -6,7 +6,9 @@
 
 - Platform directives can be simplified - don't inject `@Device` -> just use it form platfroms.
   
-- Is there a reason to use `data/observable-array`. It's better not ti use NS observable classes in Angular and rely only on Observable
+- Is there a reason to use `data/observable-array`. It's better not to use NS observable classes in Angular and rely only on Observable
+
+- Think of a way to cleanup the services data whe the user logs-out.
 
 
 - In list view templates - you can attach (tap) event directly in the template root view and then pass in the item directly. For example in `inbox-list.component.ts/html`:
