@@ -7,8 +7,6 @@ import { BackendService } from "../../shared/services/backend.service";
 import { Data } from "~/place-order/providers/data"
 import { CustomersService } from "~/place-order/shared/customers.service"
 import { ModalDialogParams } from "nativescript-angular/modal-dialog";
-import { GoBackModalDirective } from "~/shared/directives/go-back-modal.directive";
-import { NavigationService } from "~/shared/services/navigation.service";
 
 @Component({
     selector: "ConfirmOrder",
@@ -22,13 +20,11 @@ export class ConfirmOrderComponent implements OnInit {
     private _dataSubscription: Subscription;
     private _isLoading: boolean = false;
 
-    @ViewChild(GoBackModalDirective) goBackModalDirective: GoBackModalDirective;
     constructor(
         private params: ModalDialogParams,
         private _customersService: CustomersService,
         private data: Data,
         private backendService: BackendService,
-        private _navigationService: NavigationService,
     ) { }
 
     ngOnInit(): void {
@@ -82,9 +78,5 @@ export class ConfirmOrderComponent implements OnInit {
             .then(() => {
                 this.params.closeCallback();
             });
-    }
-
-    goBack() {
-        this.goBackModalDirective.goBack();
     }
 }

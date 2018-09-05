@@ -2,8 +2,7 @@ import { Component, OnInit, ViewContainerRef } from "@angular/core";
 import { ModalDialogService, ModalDialogOptions } from "nativescript-angular/directives/dialogs";
 import { ModalComponent } from "~/core/navigation/modal.component";
 import { UserService } from "~/shared/services/user.service";
-import { config } from "~/core/routes-config"
-import { NavigationService } from "~/shared/services/navigation.service";
+import { config } from "~/core/routes-config";
 
 @Component({
     templateUrl: "./app.component.html"
@@ -11,7 +10,6 @@ import { NavigationService } from "~/shared/services/navigation.service";
 export class AppComponent implements OnInit {
 
     constructor(private modalDialogService: ModalDialogService,
-        private _navigationService: NavigationService,
         // Access root viewContainerRef from custom-nav-bar.directive.ts
         public viewContainerRef: ViewContainerRef,
         private _userService: UserService) {
