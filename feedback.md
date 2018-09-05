@@ -30,5 +30,6 @@ onMessageItemTap(tappedInboxItem: any): void {
 
 - **ModulesTeam** Consider having `data` property in the list-view itemTap event for easier access to the data item.
 - **ModulesTeam** Handle android back button in nativescript-andgular
+- **ModulesTeam** Simplify using modals with navigation inside them - create an API that do the most work for you
 
 
