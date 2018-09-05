@@ -26,7 +26,6 @@
         "node_modules",
         "platforms",
         "typings",
-        "**/*.aot.ts",
         "additional-models"
     ]
 }
