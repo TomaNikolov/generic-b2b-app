@@ -21,7 +21,6 @@ export class GoBackModalDirective implements OnInit {
     }
 
     public goBack() {
-        debugger;
         if (this.isInsideModalDialog()) {
             if (this._routerExtensions.canGoBackToPreviousPage()) {
                 this._routerExtensions.backToPreviousPage();
