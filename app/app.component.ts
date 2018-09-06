@@ -13,12 +13,14 @@ export class AppComponent implements OnInit {
         // Access root viewContainerRef from custom-nav-bar.directive.ts
         public viewContainerRef: ViewContainerRef,
         private _userService: UserService) {
-        // this.userService.logout()
+        this._userService.logout()
     }
 
     ngOnInit(): void {
         if (!this._userService.isLoggedIn()) {
-            this.open("login").catch(error => console.log(error));
+            setTimeout(() => {
+                this.open("login").catch(error => console.log(error));
+            });
         }
     }
 

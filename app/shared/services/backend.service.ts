@@ -25,6 +25,17 @@ export class BackendService {
         return Kinvey.User.signup({ username, password });
     }
 
+<<<<<<< HEAD
+=======
+    login(username: string, password: string) {
+        return Kinvey.User.login(username, password);
+    }
+
+    loginWithMIC(redirectUri: string) {
+        return Kinvey.User.loginWithMIC(redirectUri)
+    }
+
+>>>>>>> Initial loginWithMIC
     getActiveUser() {
         return Kinvey.User.getActiveUser();
     }

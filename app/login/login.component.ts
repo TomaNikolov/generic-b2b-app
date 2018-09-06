@@ -6,6 +6,11 @@ import * as app from "tns-core-modules/application/application";
 
 import { User } from "~/models/user.model";
 import { UserService } from "~/shared/services/user.service";
+import { NavigationButton } from "tns-core-modules/ui/action-bar/action-bar";
+import { NgZone } from "@angular/core";
+import { NavigationStart } from "@angular/router";
+import { NavigatedData } from "tns-core-modules/ui/frame/frame";
+import { of, Subject } from "rxjs";
 
 
 @Component({
@@ -16,32 +21,49 @@ import { UserService } from "~/shared/services/user.service";
 })
 export class LoginComponent implements OnInit {
 	isLoggingIn = true;
+	public isLoading = false;
 	user: User;
 	@ViewChild("password") password: ElementRef;
 	@ViewChild("confirmPassword") confirmPassword: ElementRef;
 
 	constructor(private _page: Page,
 		private _userService: UserService,
+		private _zone: NgZone,
 		private _params: ModalDialogParams) {
 		this.user = new User();
 		this.user.password = "admin";
-		this.user.username = "admin"
+		this.user.username = "admin";
+	}
+
+	androidBackButtonCallback(args: any) {
+		args.cancel = true;
+		app.android.foregroundActivity.moveTaskToBack(true);
 	}
 
 	ngOnInit(): void {
 		if (app.android) {
-			this._page.on("loaded", () => {
-				this._page.frame.on("activityBackPressed", (args: any) => {
-					args.cancel = true;
-					// global.android.os.Process.killProcess(global.android.os.Process.myPid());
-					app.android.foregroundActivity.moveTaskToBack(true);
-				});
+			this._page.on("loaded", (d) => {
+				this._page.frame.on("activityBackPressed", this.androidBackButtonCallback);
 			});
 		}
+
+		this._page.on("navigatedTo", (args: NavigatedData) => {
+			if (args.isBackNavigation) {
+				this._zone.run(() => {
+					this.isLoading = false;
+				});
+			}
+		});
 	}
 
 	toggleForm() {
 		this.isLoggingIn = !this.isLoggingIn;
+	}
+
+	submitWithMic() {
+		this.isLoading = true;
+		this.proceedWithLogin(this._userService.loginWithMIC('http://example.com'));
+		this._page.frame.removeEventListener("activityBackPressed", this.androidBackButtonCallback);
 	}
 
 	submit() {
@@ -58,13 +80,7 @@ export class LoginComponent implements OnInit {
 	}
 
 	login() {
-		this._userService.login(this.user)
-			.then(() => {
-				this._params.closeCallback(this.user);
-			})
-			.catch(() => {
-				this.alert("Unfortunately we could not find your account.");
-			});
+		this.proceedWithLogin(this._userService.login(this.user));
 	}
 
 	register() {
@@ -110,6 +126,16 @@ export class LoginComponent implements OnInit {
 		if (!this.isLoggingIn) {
 			this.confirmPassword.nativeElement.focus();
 		}
+	}
+
+	private proceedWithLogin(loginPromise: Promise<any>) {
+		loginPromise
+			.then(() => {
+				this._zone.run(() => this._params.closeCallback(this.user));
+			})
+			.catch(() => {
+				this.alert("Unfortunately we could not find your account.");
+			});
 	}
 
 	alert(message: string) {

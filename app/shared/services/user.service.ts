@@ -46,4 +46,8 @@ export class UserService {
         const user = this.backendService.getActiveUser();
         return !!user
     }
+
+    loginWithMIC(redirectUri: string) {
+        return this.backendService.loginWithMIC(redirectUri);
+    }
 }
