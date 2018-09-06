@@ -26,9 +26,6 @@ registerElement("Mapbox", () => require("nativescript-mapbox").MapboxView);
         MyCustomersListComponent,
         CustomersDetailComponent,
     ],
-    entryComponents: [
-        MyCustomersListComponent
-    ],
     providers: [
         CustomersService
     ],

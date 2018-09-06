@@ -23,9 +23,6 @@ import { CustomersService } from "~/master-details/shared/customers.service";
         CustomersListComponent,
         CustomersDetailComponent
     ],
-    entryComponents: [
-        CustomersListComponent
-    ],
     providers: [
         CustomersService
     ],

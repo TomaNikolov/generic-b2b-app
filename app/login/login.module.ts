@@ -11,9 +11,6 @@ import { LoginComponent } from "~/login/login.component";
             { path: "", component: LoginComponent }
         ])
     ],
-    entryComponents: [
-        LoginComponent
-    ],
     declarations: [
         LoginComponent
     ],

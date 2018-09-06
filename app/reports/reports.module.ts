@@ -16,9 +16,6 @@ import { NativeScriptUIDataFormModule } from "nativescript-ui-dataform/angular";
     declarations: [
         ReportsListComponent
     ],
-    entryComponents: [
-        ReportsListComponent
-    ],
     providers: [
         ReportsService
     ],

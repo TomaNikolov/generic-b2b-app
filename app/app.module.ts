@@ -13,8 +13,6 @@ import { TabsComponent } from "~/core/navigation/tabs.component";
 import { ModalComponent } from "~/core/navigation/modal.component";
 import { LoggedInLazyLoadGuard } from "./logged-in-lazy-load.guard";
 
-import { UserService } from "~/shared/services/user.service";
-
 @NgModule({
     bootstrap: [AppComponent],
     entryComponents: [

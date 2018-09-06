@@ -23,9 +23,6 @@ import { InboxService } from "./shared/inbox.service";
         InboxListComponent,
         InboxDetailComponent
     ],
-    entryComponents: [
-        InboxListComponent
-    ],
     providers: [
         InboxService
     ],

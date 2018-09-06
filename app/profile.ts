@@ -22,9 +22,6 @@ export class ProfileComponent {
             { path: "", component: ProfileComponent }
         ])
     ],
-    entryComponents: [
-        ProfileComponent
-    ],
     declarations: [
         ProfileComponent
     ],

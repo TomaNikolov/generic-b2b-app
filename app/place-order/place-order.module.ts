@@ -32,9 +32,6 @@ import { Utils } from "~/place-order/shared/utils";
         QuestionableBooleanPipe,
         TotalPricePipe,
     ],
-    entryComponents: [
-        PlaceOrderListComponent
-    ],
     providers: [
         ProductsService,
         CustomersService,
