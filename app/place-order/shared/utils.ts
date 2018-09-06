@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core";
-import { ObservableArray } from "tns-core-modules/data/observable-array/observable-array";
 
 @Injectable()
 export class Utils {
     constructor() { }
 
-    public getTotalOrder(products: ObservableArray<any>) {
+    public getTotalOrder(products: any[]) {
+        products = products || [];
         const total = products
             .map(p => p.quantity * this.parseCurrency(p.unitPrice))
             .reduce((a, b) => a + b, 0)

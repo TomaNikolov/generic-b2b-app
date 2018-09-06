@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { ObservableArray } from "data/observable-array";
 import { ActivatedRoute } from "@angular/router";
 import { TabView } from "ui/tab-view";
 import { CustomersService } from "~/master-details/shared/customers.service";
@@ -13,7 +12,7 @@ import * as app from "tns-core-modules/application/application";
 })
 export class CustomersDetailComponent implements OnInit {
     private _customer: any;
-    private _categoricalSource: ObservableArray<any>;
+    private _categoricalSource: any[];
 
     constructor(
         private _navigationService: NavigationService,
@@ -27,17 +26,17 @@ export class CustomersDetailComponent implements OnInit {
             this._customer = this._customersService.getCustomerById(customerId);
         });
 
-        this._categoricalSource = new ObservableArray([
+        this._categoricalSource = [
             { label: "Last month", amount: 75000 },
             { label: "This month", amount: 25000 },
-        ]);
+        ];
     }
 
     get customer(): any {
         return this._customer;
     }
 
-    get categoricalSource(): ObservableArray<any> {
+    get categoricalSource(): any[] {
         return this._categoricalSource;
     }
 

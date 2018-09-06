@@ -1,8 +1,7 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { ObservableArray } from "data/observable-array";
 import { ActivatedRoute } from "@angular/router";
 import { ListViewEventData } from "nativescript-ui-listview";
-import { Subscription } from "rxjs";
+import { Subscription, Observable } from "rxjs";
 import { finalize } from "rxjs/operators";
 
 import { CustomersService } from "./shared/customers.service";
@@ -15,7 +14,7 @@ import { NavigationService } from "~/shared/services/navigation.service";
 })
 export class CustomersListComponent implements OnInit, OnDestroy {
     private _isLoading: boolean = false;
-    private _customers: ObservableArray<any> = new ObservableArray<any>([]);
+    private _customers: Observable<any>
     private _dataSubscription: Subscription;
 
     constructor(
@@ -34,7 +33,7 @@ export class CustomersListComponent implements OnInit, OnDestroy {
             this._dataSubscription = this._customersService.load()
                 .pipe(finalize(() => this._isLoading = false))
                 .subscribe(customers => {
-                    this._customers = new ObservableArray(customers);
+                    this._customers = customers;
                     this._isLoading = false;
                 });
         }
@@ -47,7 +46,7 @@ export class CustomersListComponent implements OnInit, OnDestroy {
         }
     }
 
-    get customers(): ObservableArray<any> {
+    get customers(): Observable<any> {
         return this._customers;
     }
 

@@ -1,5 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
-import { ObservableArray } from "tns-core-modules/data/observable-array/observable-array";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Subscription } from "rxjs";
 import { finalize } from "rxjs/operators";
 import { ActivatedRoute } from "@angular/router";
@@ -17,7 +16,7 @@ import { NavigationService } from "~/shared/services/navigation.service";
 })
 export class PlaceOrderListComponent implements OnInit, OnDestroy {
     private _isLoading: boolean = false;
-    private _products: ObservableArray<any> = new ObservableArray<any>([]);
+    private _products: any[];
     private _dataSubscription: Subscription;
     private _customerId: string;
     private _orderOptions: OrderOptions;
@@ -36,15 +35,14 @@ export class PlaceOrderListComponent implements OnInit, OnDestroy {
             this._dataSubscription = this._productsService.load()
                 .pipe(finalize(() => this._isLoading = false))
                 .subscribe(products => {
-                    this._products = new ObservableArray(products.map((p) => ({
+                    this._products = products.map(p => ({
                         _id: p._id,
                         unitInStock: p.unitInStock,
                         productName: p.productName,
                         unitPrice: p.unitPrice,
                         promo: p.promo,
                         quantity: 0,
-                    })));
-                    this._isLoading = false;
+                    }));
                 });
         }
 
@@ -79,7 +77,7 @@ export class PlaceOrderListComponent implements OnInit, OnDestroy {
         return this._orderOptions;
     }
 
-    get products(): ObservableArray<any> {
+    get products(): any[] {
         return this._products;
     }
 
