@@ -1,5 +1,5 @@
-import { Injectable, NgZone } from "@angular/core";
-import { Observable, throwError } from "rxjs";
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
 import { BackendService } from "../../shared/services/backend.service";
 
 @Injectable()
@@ -17,7 +17,7 @@ export class CustomersService {
     }
 
     load(): Observable<any> {
-        const customers = this.backendService.getAllElements('customers');
+        const customers = this.backendService.find('customers');
         customers.subscribe(customers => {
             this._customers = customers;
         });

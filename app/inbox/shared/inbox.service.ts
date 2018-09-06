@@ -1,15 +1,12 @@
-import { Injectable, NgZone } from "@angular/core";
-import { Http } from "@angular/http";
-import { Observable, throwError } from "rxjs";
-import { catchError } from "rxjs/operators";
-import { BackendService } from "../../shared/services/backend.service";
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import { BackendService } from "~/shared/services/backend.service";
 
 @Injectable()
 export class InboxService {
     private _messages: any[] = [];
 
-    constructor(private _ngZone: NgZone,
-        private backendService: BackendService) { }
+    constructor(private backendService: BackendService) { }
 
     getMessageById(id: string): any {
         if (!id) {
@@ -20,7 +17,7 @@ export class InboxService {
     }
 
     load(): Observable<any> {
-        const messages = this.backendService.getAllElements('messages');
+        const messages = this.backendService.find('messages');
         messages.subscribe(messagesData => {
             this._messages = messagesData;
         });

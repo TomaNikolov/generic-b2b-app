@@ -1,10 +1,20 @@
 import { Injectable } from "@angular/core";
+import { Observable, of } from "rxjs";
+import { last, catchError, shareReplay } from "rxjs/operators";
 import { Kinvey } from "kinvey-nativescript-sdk";
 
 @Injectable()
 export class BackendService {
     constructor() {
-        this.init();
+        Kinvey.init();
+    }
+
+    login(username: string, password: string) {
+        return Kinvey.User.login(username, password);
+    }
+
+    loginWithMIC(redirectUri: string, authorizationGrant?: Kinvey.AuthorizationGrant, options?: Kinvey.RequestOptions) {
+        return Kinvey.User.loginWithMIC(redirectUri, authorizationGrant, options);
     }
 
     logout() {
@@ -15,27 +25,33 @@ export class BackendService {
         return Kinvey.User.signup({ username, password });
     }
 
-    login(username: string, password: string) {
-        return Kinvey.User.login(username, password);
-    }
-
     getActiveUser() {
         return Kinvey.User.getActiveUser();
     }
 
-    getAllElements(collectionName: string) {
-        return Kinvey.DataStore.collection(collectionName).find();
+    resetPassword(email: string, options?: Kinvey.RequestOptions) {
+        return Kinvey.User.resetPassword(email, options);
     }
 
-    resetPassword(email: string) {
-        return Kinvey.User.resetPassword(email);
+    save(collectionName: string, item: any, dataStoreType?: Kinvey.DataStoreType, options?: Kinvey.RequestOptions) {
+        return Kinvey.DataStore.collection(collectionName, dataStoreType).save(item, options);
     }
 
-    save(collectionName: string, obj: any) {
-        return Kinvey.DataStore.collection(collectionName).save(obj);
+    find(collectionName: string, dataStoreType?: Kinvey.DataStoreType, query?: Kinvey.Query, options?: Kinvey.RequestOptions) {
+        const observableResult = Kinvey.DataStore.collection(collectionName, dataStoreType).find(query, options);
+        return this.cacheLast(observableResult);
     }
 
-    private init() {
-        return Kinvey.init();
+    findById(collectionName: string, id: string, dataStoreType?: Kinvey.DataStoreType, options?: Kinvey.RequestOptions) {
+        const observableResult = Kinvey.DataStore.collection(collectionName, dataStoreType).findById(id, options);
+        return this.cacheLast(observableResult);
+    }
+
+    private cacheLast(observable: Observable<any>) {
+        return observable.pipe(
+            catchError(_ => of(null)),
+            last(value => !!value),
+            shareReplay(1)
+        );
     }
 }

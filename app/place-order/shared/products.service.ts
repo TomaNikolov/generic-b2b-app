@@ -1,6 +1,6 @@
-import { Injectable, NgZone } from "@angular/core";
-import { Observable, throwError } from "rxjs";
-import { BackendService } from "../../shared/services/backend.service";
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import { BackendService } from "~/shared/services/backend.service";
 
 @Injectable()
 export class ProductsService {
@@ -9,7 +9,7 @@ export class ProductsService {
     constructor(private backendService: BackendService) { }
 
     load(): Observable<any> {
-        const products = this.backendService.getAllElements('products');
+        const products = this.backendService.find('products');
         products.subscribe(products => {
             this._products = products;
         });
