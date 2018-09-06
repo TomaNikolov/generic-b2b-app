@@ -43,8 +43,7 @@ export class UserService {
     }
 
     isLoggedIn(): boolean {
-        const user = this.backendService.getActiveUser();
-        return !!user
+        return !!this.backendService.getActiveUser();
     }
 
     loginWithMIC(redirectUri: string) {
