@@ -7,7 +7,7 @@ import { Data } from "~/place-order/providers/data";
 import { ProductsService } from "~/place-order/shared/products.service";
 import { Utils } from "~/place-order/shared/utils";
 import { OrderOptions } from "./order-options.model";
-import { NavigationService } from "~/shared/services/navigation.service";
+import { NavigationService } from "~/core/services/navigation.service";
 
 @Component({
     selector: "productsList",

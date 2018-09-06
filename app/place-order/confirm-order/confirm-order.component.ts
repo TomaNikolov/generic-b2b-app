@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { finalize } from "rxjs/operators";
 import { Subscription, of, Observable } from "rxjs";
 import { share } from 'rxjs/operators';
-import { BackendService } from "../../shared/services/backend.service";
+import { BackendService } from "~/core/services/backend.service";
 
 import { Data } from "~/place-order/providers/data"
 import { CustomersService } from "~/place-order/shared/customers.service"

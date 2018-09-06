@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { TabView } from "ui/tab-view";
-import { CustomersService } from "~/master-details/shared/customers.service";
-import { NavigationService } from "~/shared/services/navigation.service";
+import { CustomersService } from "~/agenda/shared/customers.service";
+import { NavigationService } from "~/core/services/navigation.service";
 import * as app from "tns-core-modules/application/application";
 
 @Component({

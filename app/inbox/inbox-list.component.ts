@@ -5,7 +5,7 @@ import { Subscription, Observable } from "rxjs";
 import { finalize } from "rxjs/operators";
 
 import { InboxService } from "./shared/inbox.service";
-import { NavigationService } from "~/shared/services/navigation.service";
+import { NavigationService } from "~/core/services/navigation.service";
 
 @Component({
     selector: "InboxList",

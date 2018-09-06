@@ -4,14 +4,13 @@ import { NativeScriptModule } from "nativescript-angular/nativescript.module";
 import { NativeScriptUISideDrawerModule } from "nativescript-ui-sidedrawer/angular/side-drawer-directives";
 import { NativeScriptFormsModule } from "nativescript-angular/forms"
 
-import { SharedModule } from "~/shared/shared.module"
+import { CoreModule } from "~/core/core.module"
 import { AppRoutingModule } from "~/app-routing.module"
 import { AppComponent } from "~/app.component";
 
-import { SideDrawerItemsComponent } from "~/core/navigation/side-drawer-items.component"
-import { TabsComponent } from "~/core/navigation/tabs.component";
-import { ModalComponent } from "~/core/navigation/modal.component";
-import { LoggedInLazyLoadGuard } from "./logged-in-lazy-load.guard";
+import { SideDrawerItemsComponent } from "~/navigation/side-drawer/side-drawer-items.component"
+import { TabsComponent } from "~/navigation/tabs/tabs.component";
+import { ModalComponent } from "~/navigation/modal/modal.component";
 
 @NgModule({
     bootstrap: [AppComponent],
@@ -20,21 +19,17 @@ import { LoggedInLazyLoadGuard } from "./logged-in-lazy-load.guard";
     ],
     imports: [
         NativeScriptModule,
-        SharedModule,
-        AppRoutingModule,
-
         NativeScriptFormsModule,
         NativeScriptUISideDrawerModule,
+
+        AppRoutingModule,
+        CoreModule
     ],
     declarations: [
         AppComponent,
-
         SideDrawerItemsComponent,
         TabsComponent,
         ModalComponent,
-    ],
-    providers: [
-        LoggedInLazyLoadGuard
     ],
     schemas: [NO_ERRORS_SCHEMA]
 })

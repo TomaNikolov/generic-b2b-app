@@ -1,7 +1,7 @@
-import { Injectable, ViewContainerRef } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { NgZone, ApplicationRef } from "@angular/core";
 import { ModalDialogOptions, ModalDialogService } from "nativescript-angular/modal-dialog";
-import { ModalComponent } from "~/core/navigation/modal.component";
+import { ModalComponent } from "~/navigation/modal/modal.component";
 import { ActivatedRoute } from "@angular/router";
 import { RouterExtensions } from "nativescript-angular/router";
 import { ExtendedNavigationExtras } from "nativescript-angular/router/router-extensions";

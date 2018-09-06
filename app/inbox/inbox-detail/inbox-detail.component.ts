@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from '@angular/router';
 import { InboxService } from "../shared/inbox.service";
-import { NavigationService } from "~/shared/services/navigation.service";
+import { NavigationService } from "~/core/services/navigation.service";
 
 @Component({
     selector: "InboxDetail",

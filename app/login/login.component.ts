@@ -4,8 +4,8 @@ import { Page } from "tns-core-modules/ui/page/page";
 import { ModalDialogParams } from "nativescript-angular/directives/dialogs";
 import * as app from "tns-core-modules/application/application";
 
-import { User } from "~/models/user.model";
-import { UserService } from "~/shared/services/user.service";
+import { User } from "~/shared/models/user.model";
+import { UserService } from "~/core/services/user.service";
 import { NavigationButton } from "tns-core-modules/ui/action-bar/action-bar";
 import { NgZone } from "@angular/core";
 import { NavigationStart } from "@angular/router";

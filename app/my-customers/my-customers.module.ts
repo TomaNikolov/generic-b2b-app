@@ -1,7 +1,4 @@
 import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
-import { NativeScriptCommonModule } from "nativescript-angular/common";
-import { NativeScriptFormsModule } from "nativescript-angular/forms";
-import { NativeScriptUIListViewModule } from "nativescript-ui-listview/angular/listview-directives";
 
 import { SharedModule } from "~/shared/shared.module"
 import { CustomersDetailComponent } from "~/my-customers/customers-detail/customers-detail.component";
@@ -15,12 +12,10 @@ registerElement("Mapbox", () => require("nativescript-mapbox").MapboxView);
 
 @NgModule({
     imports: [
+        NativeScriptHttpModule,
+
         SharedModule,
         MyCustomersRoutingModule,
-        NativeScriptCommonModule,
-        NativeScriptFormsModule,
-        NativeScriptUIListViewModule,
-        NativeScriptHttpModule
     ],
     declarations: [
         MyCustomersListComponent,

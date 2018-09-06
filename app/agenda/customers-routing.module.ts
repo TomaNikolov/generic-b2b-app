@@ -2,8 +2,8 @@ import { NgModule } from "@angular/core";
 import { Routes } from "@angular/router";
 import { NativeScriptRouterModule } from "nativescript-angular/router";
 
-import { CustomersDetailComponent } from "~/master-details/customers-detail/customers-detail.component";
-import { CustomersListComponent } from "~/master-details/customers-list.component";
+import { CustomersDetailComponent } from "~/agenda/customers-detail/customers-detail.component";
+import { CustomersListComponent } from "~/agenda/customers-list.component";
 
 const routes: Routes = [
     { path: "", redirectTo: "customer-list" },

@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewContainerRef } from "@angular/core";
 import { ModalDialogService, ModalDialogOptions } from "nativescript-angular/directives/dialogs";
-import { ModalComponent } from "~/core/navigation/modal.component";
-import { UserService } from "~/shared/services/user.service";
-import { config } from "~/core/routes-config";
+import { ModalComponent } from "~/navigation/modal/modal.component";
+import { UserService } from "~/core/services/user.service";
+import { config } from "~/navigation/routes-config";
 
 @Component({
     templateUrl: "./app.component.html"

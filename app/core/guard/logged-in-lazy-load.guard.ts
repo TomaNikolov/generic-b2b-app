@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { CanLoad } from "@angular/router";
-import { BackendService } from "./shared/services/backend.service";
+import { BackendService } from "~/core/services/backend.service";
 
 @Injectable()
 export class LoggedInLazyLoadGuard implements CanLoad {

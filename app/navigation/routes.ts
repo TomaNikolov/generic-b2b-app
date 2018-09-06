@@ -1,4 +1,4 @@
-import { LoggedInLazyLoadGuard } from "../logged-in-lazy-load.guard";
+import { LoggedInLazyLoadGuard } from "~/core/guard/logged-in-lazy-load.guard";
 
 export const routes = {
     "tabs": [
@@ -11,7 +11,7 @@ export const routes = {
         {
             "path": "master",
             "outlet": "agendaTab",
-            "loadChildren": "./master-details/customers.module#CustomersModule",
+            "loadChildren": "./agenda/customers.module#CustomersModule",
             canLoad: [LoggedInLazyLoadGuard],
         },
         {

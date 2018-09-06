@@ -4,7 +4,7 @@ import { Subscription, Observable } from "rxjs";
 import { finalize } from "rxjs/operators";
 
 import { CustomersService } from "~/my-customers/shared/customers.service";
-import { NavigationService } from "~/shared/services/navigation.service";
+import { NavigationService } from "~/core/services/navigation.service";
 import { ActivatedRoute } from "@angular/router";
 
 @Component({

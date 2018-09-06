@@ -5,7 +5,7 @@ import { Http } from "@angular/http";
 import { ActivatedRoute } from '@angular/router';
 import { TabView } from "tns-core-modules/ui/tab-view/tab-view";
 import * as app from "application";
-import { NavigationService } from "~/shared/services/navigation.service";
+import { NavigationService } from "~/core/services/navigation.service";
 
 @Component({
     selector: "CustomersDetail",

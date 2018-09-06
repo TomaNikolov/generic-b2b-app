@@ -5,7 +5,7 @@ import { Subscription, Observable } from "rxjs";
 import { finalize } from "rxjs/operators";
 
 import { CustomersService } from "./shared/customers.service";
-import { NavigationService } from "~/shared/services/navigation.service";
+import { NavigationService } from "~/core/services/navigation.service";
 
 @Component({
     selector: "CustomersList",
@@ -21,12 +21,9 @@ export class CustomersListComponent implements OnInit, OnDestroy {
         private _activatedRoute: ActivatedRoute,
         private _customersService: CustomersService,
         private _navigationService: NavigationService,
-    ) {
-        console.log("CustomersListComponent constructor")
-    }
+    ) { }
 
     ngOnInit(): void {
-        console.log("CustomersListComponent ngOnInit")
         if (!this._dataSubscription) {
             this._isLoading = true;
 
