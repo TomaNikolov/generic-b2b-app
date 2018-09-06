@@ -21,7 +21,6 @@ import { of, Subject } from "rxjs";
 })
 export class LoginComponent implements OnInit {
 	isLoggingIn = true;
-	public isLoading = false;
 	user: User;
 	@ViewChild("password") password: ElementRef;
 	@ViewChild("confirmPassword") confirmPassword: ElementRef;
@@ -46,14 +45,6 @@ export class LoginComponent implements OnInit {
 				this._page.frame.on("activityBackPressed", this.androidBackButtonCallback);
 			});
 		}
-
-		this._page.on("navigatedTo", (args: NavigatedData) => {
-			if (args.isBackNavigation) {
-				this._zone.run(() => {
-					this.isLoading = false;
-				});
-			}
-		});
 	}
 
 	toggleForm() {
@@ -61,7 +52,6 @@ export class LoginComponent implements OnInit {
 	}
 
 	submitWithMic() {
-		this.isLoading = true;
 		this.proceedWithLogin(this._userService.loginWithMIC('http://example.com'));
 		this._page.frame.removeEventListener("activityBackPressed", this.androidBackButtonCallback);
 	}
