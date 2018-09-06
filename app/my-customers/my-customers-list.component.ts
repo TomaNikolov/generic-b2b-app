@@ -52,8 +52,7 @@ export class MyCustomersListComponent implements OnInit, OnDestroy {
         return this._isLoading;
     }
 
-    onCustomerItemTap(args: ListViewEventData): void {
-        const tappedCustomerItem = args.view.bindingContext;
+    onCustomerItemTap(tappedCustomerItem): void {
         this._navigationService.relativeRouterNavigation(["../customer-detail", tappedCustomerItem._id], this._activatedRoute);
     }
 }

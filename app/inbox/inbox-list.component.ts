@@ -52,8 +52,7 @@ export class InboxListComponent implements OnInit, OnDestroy {
         return this._isLoading;
     }
 
-    onMessageItemTap(args: ListViewEventData): void {
-        const tappedInboxItem = args.view.bindingContext;
+    onMessageItemTap(tappedInboxItem): void {
         this._navigationService.relativeRouterNavigation(["../inbox-detail", tappedInboxItem._id], this._activatedRoute);
     }
 }

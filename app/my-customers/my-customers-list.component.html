@@ -1,7 +1,7 @@
 <GridLayout hideNavBar class="page page-content">
-    <RadListView [items]="customers" (itemTap)="onCustomerItemTap($event)" class="list-group">
+    <RadListView [items]="customers" class="list-group">
         <ng-template tkListItemTemplate let-customer="item">
-            <GridLayout class="list-group-item" rows="auto, *, *" columns="auto">
+            <GridLayout class="list-group-item" (tap)="onCustomerItemTap(customer)" rows="auto, *, *" columns="auto">
                 <Label [text]="customer.name"  row="0" class="m-l-5 list-group-item-heading text-primary text-left"></Label>
                 <Label [text]="customer.address" row="1"  class="m-l-5 list-group-item-text text-muted text-left"></Label>
                 <StackLayout row="2" class="hr-light m-t-10"></StackLayout>
