@@ -1,19 +1,8 @@
-import { Component, NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
+import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
 import { NativeScriptRouterModule } from "nativescript-angular/router";
-import { SharedModule } from "~/shared/shared.module"
 
-@Component({
-    template: `
-<GridLayout customNavBar>
-	<ScrollView>
-		<Label text="Profile" class="h2"></Label>
-	</ScrollView>
-</GridLayout>
-`
-})
-export class ProfileComponent {
-    constructor() { }
-}
+import { SharedModule } from "~/shared/shared.module";
+import { ProfileComponent } from "~/profile/profile.component";
 
 @NgModule({
     imports: [

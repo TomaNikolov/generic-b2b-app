@@ -20,8 +20,7 @@ export class MyCustomersListComponent implements OnInit, OnDestroy {
         private _customersService: CustomersService,
         private _navigationService: NavigationService,
         private _activatedRoute: ActivatedRoute,
-    ) {
-    }
+    ) { }
 
     ngOnInit(): void {
         if (!this._dataSubscription) {

@@ -46,7 +46,7 @@ export const routes = {
         },
         {
             "path": "profile",
-            "loadChildren": "./profile#ProfileModule",
+            "loadChildren": "./profile/profile.module#ProfileModule",
             "title": "Profile"
         },
         {
