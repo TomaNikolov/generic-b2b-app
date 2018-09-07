@@ -8,7 +8,6 @@ import { config } from "~/navigation/routes-config";
     templateUrl: "./app.component.html"
 })
 export class AppComponent implements OnInit {
-
     constructor(private modalDialogService: ModalDialogService,
         // Access root viewContainerRef from custom-nav-bar.directive.ts
         public viewContainerRef: ViewContainerRef,

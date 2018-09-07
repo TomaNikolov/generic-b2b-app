@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { ListViewEventData } from "nativescript-ui-listview";
 import { Subscription, Observable } from "rxjs";
 import { finalize } from "rxjs/operators";
 
