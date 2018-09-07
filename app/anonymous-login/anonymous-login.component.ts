@@ -2,8 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { ModalDialogParams } from "nativescript-angular/directives/dialogs";
 import * as app from "tns-core-modules/application/application";
 
-import { User } from "~/models/user.model";
-import { UserService } from "~/shared/services/user.service";
+import { User } from "~/shared/models/user.model";
+import { UserService } from "~/core/services/user.service";
 import { Page } from "tns-core-modules/ui/page/page";
 
 

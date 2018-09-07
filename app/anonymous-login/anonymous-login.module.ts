@@ -11,9 +11,6 @@ import { AnonymousLoginComponent } from "~/anonymous-login/anonymous-login.compo
             { path: "", component: AnonymousLoginComponent }
         ])
     ],
-    entryComponents: [
-        AnonymousLoginComponent
-    ],
     declarations: [
         AnonymousLoginComponent
     ],
