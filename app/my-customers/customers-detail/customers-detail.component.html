@@ -1,9 +1,5 @@
-<ContentView showNavBar height="100%" width="100%">
+<ContentView showNavBar goBack height="100%" width="100%">
     <ActionBar title="">
-        <NavigationButton *ifAndroid android.systemIcon="ic_menu_back" (tap)="goBack()"></NavigationButton>
-        <NavigationButton *ifIos visibility="collapse"></NavigationButton>
-        <ActionItem *ifIos ios.systemIcon="8" (tap)="goBack()"></ActionItem>
-
         <ActionItem text="View details" ios.position="right" (tap)="viewDetails()"></ActionItem>
     </ActionBar>
     <Mapbox #map [accessToken]="accessToken" mapStyle="traffic_day" latitude="37.7397" longitude="-121.4252" hideCompass="true"

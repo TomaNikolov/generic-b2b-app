@@ -1,9 +1,5 @@
-<GridLayout showNavBar class="page page-content">
+<GridLayout showNavBar goBack class="page page-content">
     <ActionBar title="">
-        <NavigationButton *ifAndroid android.systemIcon="ic_menu_back" (tap)="goBack()"></NavigationButton>
-        <NavigationButton *ifIos visibility="collapse"></NavigationButton>
-        <ActionItem *ifIos ios.systemIcon="8" (tap)="goBack()"></ActionItem>
-
         <ActionItem text="Place order" ios.position="right" (tap)="placeOrder()"></ActionItem>
         <ActionItem text="View map" ios.position="right" (tap)="viewMap()"></ActionItem>
     </ActionBar>
