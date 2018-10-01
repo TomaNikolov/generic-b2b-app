@@ -8,41 +8,7 @@
         <ActionItem text="View map" ios.position="right" (tap)="viewMap()"></ActionItem>
     </ActionBar>
     <StackLayout>
-        <Label class="action-bar-title" [text]="customer.name" class="m-l-7 list-group-item-heading text-primary text-left font-weight-bold"></Label>
-        <Label class="action-bar-title" text="Info" class="m-l-5 list-group-item-heading text-primary text-left font-weight-bold"></Label>
-        <StackLayout class="list-group-item">
-            <Label text="Address" class="m-l-5 list-group-item-heading text-primary text-left"></Label>
-            <Label [text]="customer.contact.address" class="m-l-5 list-group-item-text text-muted text-left"></Label>
-        </StackLayout>
-        <StackLayout class="list-group-item">
-            <Label text="Phone" class="m-l-5 list-group-item-heading text-primary text-left"></Label>
-            <Label [text]="customer.contact.phone" class="m-l-5 list-group-item-text text-muted text-left"></Label>
-        </StackLayout>
-
-        <StackLayout class="list-group-item">
-            <Label text="Contact" class="m-l-5 list-group-item-heading text-primary text-left"></Label>
-            <GridLayout columns="auto, auto" rows="auto, auto">
-                <Image col="0" rowSpan="2" [src]="customer.contact.picture" width="30" height="30" class="thumb img-circle"></Image>
-                <Label col="1" row="0" [text]="customer.name" class="m-l-5 list-group-item-text text-muted text-left"></Label>
-                <Label col="1" row="1" [text]="customer.contact.occupation" class="m-l-5 list-group-item-text text-muted text-left"></Label>
-            </GridLayout>
-        </StackLayout>
-
-        <StackLayout class="list-group-item">
-            <Label text="Overview" class="m-l-5 list-group-item-heading text-primary text-left font-weight-bold"></Label>
-            <GridLayout columns="*, *" rows="120">
-                <RadPieChart allowAnimation="true" col="0">
-                    <DonutSeries tkPieSeries selectionMode="DataPoint" expandRadius="0.8" outerRadiusFactor="0.9" innerRadiusFactor="0.9" [items]="categoricalSource"
-                        valueProperty="amount" legendLabel="label"></DonutSeries>
-                    <RadLegendView tkPieLegend position="Right" title="Planned vs. Ordered" offsetOrigin="Right" width="110" titleColor="#30bcff"></RadLegendView>
-                </RadPieChart>
-
-                <RadPieChart allowAnimation="true" col="1">
-                    <DonutSeries tkPieSeries selectionMode="DataPoint" expandRadius="0.8" outerRadiusFactor="0.9" innerRadiusFactor="0.9" [items]="categoricalSource"
-                        valueProperty="amount" legendLabel="label"></DonutSeries>
-                    <RadLegendView tkPieLegend position="Right" title="Revenue" offsetOrigin="Right" width="110" titleColor="#30bcff"></RadLegendView>
-                </RadPieChart>
-            </GridLayout>
-        </StackLayout>
+        <RadDataForm #formObject [source]="customer" [metadata]="metadata" (propertyCommitted)="checkIn($event)">
+        </RadDataForm>
     </StackLayout>
 </GridLayout>

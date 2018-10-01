@@ -1,0 +1,52 @@
+{
+    "isReadOnly": false,
+    "commitMode": "Immediate",
+    "validationMode": "Immediate",
+    "propertyAnnotations":
+    [
+        {
+            "name": "_id",
+            "ignore": true
+        },
+        {
+            "name": "_acl",
+            "ignore": true
+        },
+        {
+            "name": "_kmd",
+            "ignore": true
+        },
+        {
+            "name": "contact",
+            "ignore": true
+        },
+        {
+            "name": "name",
+            "displayName": "Name",
+            "index": 8,
+            "validators": [
+              {
+                "name": "NonEmptyValidator"
+              }
+            ]
+        },
+        {
+            "name": "loyal",
+            "displayName": "Loyal",
+            "index": 2,
+            "editor": "Switch"
+        },
+        {
+            "name": "Salary",
+            "displayName": "Salary",
+            "index": 3,
+            "editor": "Number"
+        },
+        {
+            "name": "address",
+            "displayName": "Address",
+            "index": 5,
+            "editor": "DatePicker"
+        }
+    ]
+}
