@@ -24,11 +24,8 @@
             "name": "name",
             "displayName": "Name",
             "index": 8,
-            "validators": [
-              {
-                "name": "NonEmptyValidator"
-              }
-            ]
+            "editor": "Picker",
+            "valuesProvider": []
         },
         {
             "name": "loyal",

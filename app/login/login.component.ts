@@ -20,7 +20,6 @@ import { of, Subject } from "rxjs";
 	styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-	isLoggingIn = true;
 	user: User;
 	@ViewChild("password") password: ElementRef;
 	@ViewChild("confirmPassword") confirmPassword: ElementRef;
@@ -47,10 +46,6 @@ export class LoginComponent implements OnInit {
 		}
 	}
 
-	toggleForm() {
-		this.isLoggingIn = !this.isLoggingIn;
-	}
-
 	submitWithMic() {
 		this.proceedWithLogin(this._userService.loginWithMIC('http://example.com'));
 		this._page.frame.removeEventListener("activityBackPressed", this.androidBackButtonCallback);
@@ -62,30 +57,11 @@ export class LoginComponent implements OnInit {
 			return;
 		}
 
-		if (this.isLoggingIn) {
-			this.login();
-		} else {
-			this.register();
-		}
+		this.login();
 	}
 
 	login() {
 		this.proceedWithLogin(this._userService.login(this.user));
-	}
-
-	register() {
-		if (this.user.password != this.user.confirmPassword) {
-			this.alert("Your passwords do not match.");
-			return;
-		}
-		this._userService.register(this.user)
-			.then(() => {
-				this.alert("Your account was successfully created.");
-				this.isLoggingIn = true;
-			})
-			.catch(() => {
-				this.alert("Unfortunately we were unable to create your account.");
-			});
 	}
 
 	forgotPassword() {
@@ -110,12 +86,6 @@ export class LoginComponent implements OnInit {
 
 	focusPassword() {
 		this.password.nativeElement.focus();
-	}
-
-	focusConfirmPassword() {
-		if (!this.isLoggingIn) {
-			this.confirmPassword.nativeElement.focus();
-		}
 	}
 
 	private proceedWithLogin(loginPromise: Promise<any>) {
